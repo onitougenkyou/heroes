@@ -1,5 +1,4 @@
 <form #userForm="ngForm" (ngSubmit)="onSave(userForm.value)" novalidate>
-  <p>Is "myForm" valid? {{userForm.valid}}</p>
   <table border='1'>
     <tr>
       <td>name</td>
@@ -39,4 +38,5 @@
     <td><a (click)="edit(kk)" style="color:blueviolet">Edit</a></td>
     <td><a (click)="delete(kk._id)" style="color:blueviolet">Delete</a>  </td>
   </tr>
-</table>  
+</table>
+

@@ -8,15 +8,24 @@ import { AppComponent } from './app.component';
 
 import { PlayerService } from './player.service';
 
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { PlayerFormComponent } from './player-form/player-form.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PlayerFormComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [PlayerService],
   bootstrap: [AppComponent]

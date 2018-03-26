@@ -1,0 +1,5 @@
+Bootstrap = https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli-project/
+Jquery = npm install jquery
+express = npm install express
+mongoose = npm install mongoose
+body-parser = npm install body-parser

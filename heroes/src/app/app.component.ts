@@ -23,8 +23,6 @@ export class AppComponent {
     user.mode = this.valbutton;
     this.newService.savePlayer(user)
       .subscribe(data => {
-        alert(data.data);
-
         this.ngOnInit();
       }
       , error => this.errorMessage = error)
@@ -39,6 +37,6 @@ export class AppComponent {
 
   delete = function (id) {
     this.newService.deletePlayer(id)
-      .subscribe(data => { alert(data.data); this.ngOnInit(); }, error => this.errorMessage = error)
+      .subscribe(data => { this.ngOnInit(); }, error => this.errorMessage = error)
   }  
 }
