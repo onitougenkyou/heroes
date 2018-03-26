@@ -23,24 +23,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-var Schema = mongo.Schema;
+player = require('./model/playerModel');
+var model = mongo.model('players');
 
-var playerSchema = new Schema({
-  class: {
-    name: { type: String },
-    inventaire: {
-      weapon: {
-        name: { type: String },
-        attackPoint: { type: Number },
-        Value: { type: Number }
-      }
-    }
-  },
-
-}, { versionKey: false });
-
-
-var model = mongo.model('players', playerSchema, 'players');
 
 app.post("/api/SavePlayer", function (req, res) {
   var mod = new model(req.body);
