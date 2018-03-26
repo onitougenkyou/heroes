@@ -12,12 +12,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PlayerFormComponent } from './player-form/player-form.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerFormComponent
+    PlayerFormComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
