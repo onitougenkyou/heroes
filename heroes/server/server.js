@@ -5,7 +5,7 @@ var mongo = require("mongoose");
 
 var db = mongo.connect("mongodb://localhost:27017/player", function (err, response) {
   if (err) { console.log(err); }
-  else { console.log('Connected to ' + db, ' + ', response); }
+  else { console.log('Connected to 27017 '); }
 });
 
 
@@ -35,19 +35,20 @@ app.post("/api/SavePlayer", function (req, res) {
         res.send(err);
       }
       else {
-        res.send({ data: "Record has been Inserted..!!" });
+        res.send({ data: 'is save' });
+        console.log(data);
       }
     });
   }
   else {
-    model.findByIdAndUpdate(req.body.id, { name: req.body.class.name },
-      { weaponName: req.body.class.inventaire.weapon.name },
+    model.findByIdAndUpdate(req.body.id, { playerName: req.body.name },
+      { className: req.body.class.name },
       function (err, data) {
         if (err) {
           res.send(err);
         }
         else {
-          res.send({ data: "Record has been Updated..!!" });
+          res.send({ data: "Player Update" });
         }
       });
 
@@ -61,7 +62,7 @@ app.post("/api/deletePlayer", function (req, res) {
       res.send(err);
     }
     else {
-      res.send({ data: "Record has been Deleted..!!" });
+      res.send({ data: "Player delete" });
     }
   });
 })
@@ -75,6 +76,7 @@ app.get("/api/getPlayer", function (req, res) {
     }
     else {
       res.send(data);
+      console.log('get', data)
     }
   });
 })
