@@ -4,18 +4,21 @@
       <td>Nom du joueur</td>
       <td>
         <input name="id" type="hidden" [(ngModel)]="id" />
-        <input name="playerName" type="text" required [(ngModel)]="playerName" />
+        <input name="name" type="text" required [(ngModel)]="name" />
 
       </td>
     </tr>
-
     <tr>
-      <td>Arme</td>
+      <td>Level</td>
+      <td>    <input name="level" required type="number" [(ngModel)]="level" /></td>
+    </tr>
+    <tr>
+      <td>Classe</td>
       <td>    <input name="className" required type="text" [(ngModel)]="className" /></td>
     </tr>
     <tr>
-      <td>Arme</td>
-      <td>    <input name="weaponName" required type="text" [(ngModel)]="weaponName" /></td>
+      <td>Pv</td>
+      <td>    <input name="pv" required type="number" [(ngModel)]="pv" /></td>
     </tr>
     <tr>
       <td colspan="2">
@@ -31,16 +34,18 @@
     <td>Id</td>
     <td>Nom du joueur</td>
     <td>Classe</td>
-    <td>Arme</td>
+    <td>Level</td>
+    <td>Pv</td>
     <td>Edit</td>
     <td>Delete</td>
   </tr>
   <tr *ngFor="let kk of Repdata;let ind = index">
 
     <td>{{ind + 1}}</td>
-    <td>{{kk.playerName}}</td>
-    <td>{{kk.className}}</td>
-    <td>{{kk.weaponName}}</td>
+    <td>{{kk.name}}</td>
+    <td>{{kk.class.name}}</td>
+    <td>{{kk.level}}</td>
+    <td>{{kk.class.pv}}</td>
     <td><a (click)="edit(kk)" style="color:blueviolet">Edit</a></td>
     <td><a (click)="delete(kk._id)" style="color:blueviolet">Delete</a>  </td>
   </tr>

@@ -3,10 +3,13 @@ var mongo = require('mongoose');
 var Schema = mongo.Schema;
 
 var playerSchema = new Schema({
-  playerName: { type: String },
+  name: { type: String },
+  level: { type: Number },
   class: {
-    name: { type: String }
+    name: { type: String },
+    pv: { type: Number }
   }
+
 });
 
 module.exports = mongo.model('players', playerSchema);

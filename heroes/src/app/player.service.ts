@@ -11,7 +11,7 @@ export class PlayerService {
   constructor(private http: Http) { }
 
   savePlayer(player) {
-    return this.http.post('http://localhost:8080/api/SavePlayer/', player).map((response: Response) => response.json())
+    return this.http.post('http://localhost:8080/api/savePlayer/', player).map((response: Response) => response.json())
   }
 
   getPlayer() {

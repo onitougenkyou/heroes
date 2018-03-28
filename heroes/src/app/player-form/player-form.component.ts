@@ -15,6 +15,7 @@ export class PlayerFormComponent implements OnInit {
   constructor(private newService: PlayerService, ) { }
   Repdata;
   valbutton = "Save";
+  p;
 
 
   ngOnInit() {
@@ -23,14 +24,17 @@ export class PlayerFormComponent implements OnInit {
 
   onSave = function (player, isValid: boolean) {
     player.mode = this.valbutton;
-    let playerParse = {
-      name: player.playerName,
+    this.p = {
+      name: player.name,
+      level: player.level,
       class: {
-        name: player.className
+        name: player.className,
+        pv: player.pv
       }
     }
-    console.log(playerParse);
-    this.newService.savePlayer(playerParse)
+
+    console.log(this.p)
+    this.newService.savePlayer(player)
       .subscribe(data => {
         this.ngOnInit();
       }
@@ -38,9 +42,12 @@ export class PlayerFormComponent implements OnInit {
 
   }
   edit = function (kk) {
+    console.log(kk, 'this', this);
     this.id = kk._id;
-    this.playerName = kk.player.name;
+    this.name = kk.name;
     this.className = kk.class.name;
+    this.level = kk.level;
+    this.pv = kk.class.pv;
     this.valbutton = "Update";
   }
 
