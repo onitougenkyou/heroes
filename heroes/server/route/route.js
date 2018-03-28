@@ -14,6 +14,21 @@ app.post("/api/savePlayer", function (req, res) {
       mod.level = req.body.level;
       mod.class.name = req.body.className;
       mod.class.attributes.pv = req.body.pv;
+      mod.class.attributes.strenght = req.body.strenght;
+      mod.class.attributes.intelligence = req.body.intelligence;
+      mod.class.attributes.agility = req.body.agility;
+      mod.class.attributes.perception = req.body.perception;
+      mod.class.attributes.luck = req.body.luck;
+      mod.inventaire.weapon.name = req.body.weaponName;
+      mod.inventaire.weapon.dammage = req.body.weaponDammage;
+      mod.inventaire.weapon.value = req.body.weaponValue;
+      mod.inventaire.weapon.levelMin = req.body.weaponLevelMin;
+      mod.inventaire.armor.armorName = req.body.armorName;
+      mod.inventaire.armor.armorDefense = req.body.armorDefense;
+      mod.inventaire.armor.armorValue = req.body.armorValue;
+      mod.inventaire.armor.armorLevelMin = req.body.armorLevelMin;
+      mod.monney = req.body.monney;
+      mod.sell = req.body.sell;
 
       console.log('MOD', mod);
       mod.save(function (err, data) {
@@ -32,11 +47,33 @@ app.post("/api/savePlayer", function (req, res) {
       model.update(id, {
         name: req.body.name,
         level: req.body.level,
+        experience: req.body.experience,
         class: {
           name: req.body.className,
           attributes: {
-            pv: req.body.pv
+            pv: req.body.pv,
+            strenght: req.body.strenght,
+            intelligence: req.body.intelligence,
+            agility: req.body.agility,
+            perception: req.body.perception,
+            luck: req.body.luck
           }
+        },
+        inventaire: {
+          weapon: {
+            name: req.body.weaponName,
+            dammage: req.body.weaponDammage,
+            value: req.body.weaponValue,
+            levelMin: req.body.weaponLevelMin
+          },
+          armor: {
+            name: req.body.armorName,
+            defense: req.body.armorDefense,
+            value: req.body.armorValue,
+            levelMin: req.body.armorLevelMin
+          },
+          money: req.body.monney,
+          sell: req.body.sell
         }
       },
         function (err, data) {

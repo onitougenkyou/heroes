@@ -29,7 +29,10 @@ export class PlayerFormComponent implements OnInit {
       level: player.level,
       class: {
         name: player.className,
-        pv: player.pv
+        attributes: {
+          pv: player.pv,
+          strenght: player.strenght,
+        }
       }
     }
 
@@ -48,6 +51,7 @@ export class PlayerFormComponent implements OnInit {
     this.className = kk.class.name;
     this.level = kk.level;
     this.pv = kk.class.attributes.pv;
+    this.strenght = kk.class.attributes.strenght;
     this.valbutton = "Update";
   }
 

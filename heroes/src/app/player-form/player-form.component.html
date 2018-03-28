@@ -21,6 +21,10 @@
       <td>    <input name="pv" required type="number" [(ngModel)]="pv" /></td>
     </tr>
     <tr>
+      <td>Force</td>
+      <td>    <input name="strenght" required type="number" [(ngModel)]="strenght" /></td>
+    </tr>
+    <tr>
       <td colspan="2">
         <input type="submit" value="{{valbutton}}" />
       </td>
@@ -29,13 +33,14 @@
 </form>
 
 <table border='1'>
-
+  
   <tr>
     <td>Id</td>
     <td>Nom du joueur</td>
     <td>Classe</td>
     <td>Level</td>
     <td>Pv</td>
+    <td>Force</td>
     <td>Edit</td>
     <td>Delete</td>
   </tr>
@@ -46,6 +51,7 @@
     <td>{{kk.class.name}}</td>
     <td>{{kk.level}}</td>
     <td>{{kk.class.attributes.pv}}</td>
+    <td>{{kk.class.attributes.strenght}}</td>
     <td><a (click)="edit(kk)" style="color:blueviolet">Edit</a></td>
     <td><a (click)="delete(kk._id)" style="color:blueviolet">Delete</a>  </td>
   </tr>
