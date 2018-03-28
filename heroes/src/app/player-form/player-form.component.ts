@@ -47,7 +47,7 @@ export class PlayerFormComponent implements OnInit {
     this.name = kk.name;
     this.className = kk.class.name;
     this.level = kk.level;
-    this.pv = kk.class.pv;
+    this.pv = kk.class.attributes.pv;
     this.valbutton = "Update";
   }
 

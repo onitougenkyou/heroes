@@ -7,7 +7,9 @@ var playerSchema = new Schema({
   level: { type: Number },
   class: {
     name: { type: String },
-    pv: { type: Number }
+    attributes: {
+      pv: { type: Number }
+    }
   }
 
 });
