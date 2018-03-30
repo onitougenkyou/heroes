@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, } from '@angular/forms';
 import { PlayerService } from '../player.service';
 
+import { Defense } from '../personnage/defense';
+import { Weapon } from '../personnage/weapon';
+import { Class } from '../personnage/class';
+import { Inventaire } from '../personnage/inventaire';
+import { Player } from '../personnage/player';
+import { Monney } from '../personnage/monney';
+import { Sell } from '../personnage/sell';
+
+
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 
@@ -15,7 +24,7 @@ export class PlayerFormComponent implements OnInit {
   constructor(private newService: PlayerService, ) { }
   Repdata;
   valbutton = "Save";
-  p;
+  playerDefine;
 
 
   ngOnInit() {
@@ -24,7 +33,8 @@ export class PlayerFormComponent implements OnInit {
 
   onSave = function (player, isValid: boolean) {
     player.mode = this.valbutton;
-    this.p = {
+    this.playerDefine = {
+      id: player.id,
       name: player.name,
       level: player.level,
       class: {
@@ -36,8 +46,9 @@ export class PlayerFormComponent implements OnInit {
       }
     }
 
-    console.log(this.p)
-    this.newService.savePlayer(player)
+    console.log('player', player, 'this.playerDefine', this.playerDefine)
+    
+    this.newService.savePlayer(this.playerDefine)
       .subscribe(data => {
         this.ngOnInit();
       }
@@ -45,14 +56,15 @@ export class PlayerFormComponent implements OnInit {
 
   }
   edit = function (kk) {
-    console.log(kk, 'this', this);
     this.id = kk._id;
     this.name = kk.name;
     this.className = kk.class.name;
     this.level = kk.level;
     this.pv = kk.class.attributes.pv;
     this.strenght = kk.class.attributes.strenght;
-    this.valbutton = "Update";
+    this.valbutton = "Edit";
+    this.mode = this.valbutton;
+    console.log("THIS ID IS ",this.id, "KKKKK ==>", kk);
   }
 
   delete = function (id) {
