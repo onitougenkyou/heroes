@@ -9,6 +9,7 @@ var model = mongo.model('players');
  * Sauvegarde de nouveau joueur ou mise à jour si aucun ID n'existe. 
  */
 app.post("/api/savePlayer", function (req, res, next) {
+  console.log('coucou route save');
   var id = req.body.id;
   model.findOne({ _id: id }, function (err, player) {
     if (player !== null) {

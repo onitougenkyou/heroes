@@ -136,7 +136,9 @@ export class PlayerFormComponent implements OnInit {
     player.name = this.playerName;
 
    
-    this.newService.savePlayer(player);
+    this.newService.savePlayer(player)
+      .subscribe(data => {}
+      , error => this.errorMessage = error)
 
   }
   edit = function (kk) {
