@@ -1,10 +1,87 @@
-<form #playerForm="ngForm" (ngSubmit)="onSave(playerForm.value)" novalidate>
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Choix de votre héro</h1>
+    <form (ngSubmit)="onSave(userChoice)" #playerForm="ngForm">
 
-  <div class="ctnPlayer" *ngFor="let player of playerArray">
-    <div class="imgCtn">
-      <img src="./assets/img/{{player.class.name}}.jpg" />
-    </div>
-    <span>{{player.class.name}}</span>
+      <!-- Choix classe -->
+      <div class="form-group row">
+        <div class="ctnPlayer col-xs-1" *ngFor="let player of playerArray">
+          <div class="persoCtn" (click)="setUserChoice(player)">
+            <div class="imgCtn">
+              <label for="class{{player.class.name}}"><img src="./assets/img/{{player.class.name}}.jpg" /></label>
+              <input type="radio" name="class{{player.class.name}}" value="{{player}}" />
+            </div>
+            <span>{{player.class.name}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row descriptionClass">
+        <div class="form-class col-sm-12" *ngIf="userChoice">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="titleOfClass">{{userChoice.class.name}} - Attributs</h2>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-2">
+                <span class="font-weight-bold">Points de vie :</span>
+                <span>{{userChoice.class.attributes.pv}}</span>
+              </div>
+
+              <div class="col-md-2">
+                <span class="font-weight-bold">Force :</span>
+                <span>{{userChoice.class.attributes.strenght}}</span>
+              </div>
+
+              <div class="col-md-2">
+                <span class="font-weight-bold">Endurance :</span>
+                <span>{{userChoice.class.attributes.endurance}}</span>
+              </div>
+
+              <div class="col-md-2">
+                <span class="font-weight-bold">Intelligence :</span>
+                <span>{{userChoice.class.attributes.intelligence}}</span>
+              </div>
+
+              <div class="col-md-2">
+                <span class="font-weight-bold">Agilité :</span>
+                <span>{{userChoice.class.attributes.agility}}</span>
+              </div>
+
+              <div class="col-md-2">
+                <span class="font-weight-bold">Perception :</span>
+                <span>{{userChoice.class.attributes.perception}}</span>
+              </div>
+
+              <div class="col-md-12">
+                <p class="text-justify">{{userChoice.class.description}}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Choix nom -->
+      <div class="form-group row">
+        <div class="col-sm-12 nameChoice">
+          <h3 for="name">Nom</h3>
+          <input type="text" class="form-control mx-sm-3" id="name"
+                 required
+                 [(ngModel)]="playerName" name="name"
+                 #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+               class="alert alert-danger">
+            Le nom est obligatoire
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">Submit</button>
+    </form>
   </div>
 
-</form>
+</div>

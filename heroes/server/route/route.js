@@ -32,16 +32,16 @@ app.post("/api/savePlayer", function (req, res, next) {
           weapon: {
             name: req.body.inventaire.weapon.name,
             dammage: req.body.inventaire.weapon.dammage,
-            value: req.body.inventaire.weapon.value,
+            value: req.body.inventaire.weapon.value.value,
             levelMin: req.body.inventaire.weapon.levelMin
           },
           armor: {
             name: req.body.inventaire.armor.name,
             defense: req.body.inventaire.armor.defense,
-            value: req.body.inventaire.armor.value,
+            value: req.body.inventaire.armor.value.value,
             levelMin: req.body.inventaire.armor.levelMin
           },
-          money: req.body.inventaire.monney,
+          money: req.body.inventaire.monney.value,
           sell: req.body.inventaire.sell
         }
 
@@ -70,22 +70,23 @@ app.post("/api/savePlayer", function (req, res, next) {
             agility: req.body.class.attributes.agility,
             perception: req.body.class.attributes.perception,
             luck: req.body.class.attributes.luck
-          }
+          },
+          description: req.body.class.description
         },
         inventaire: {
           weapon: {
             name: req.body.inventaire.weapon.name,
             dammage: req.body.inventaire.weapon.dammage,
-            value: req.body.inventaire.weapon.value,
+            value: req.body.inventaire.weapon.value.value,
             levelMin: req.body.inventaire.weapon.levelMin
           },
           armor: {
             name: req.body.inventaire.armor.name,
             defense: req.body.inventaire.armor.defense,
-            value: req.body.inventaire.armor.value,
+            value: req.body.inventaire.armor.value.value,
             levelMin: req.body.inventaire.armor.levelMin
           },
-          money: req.body.inventaire.monney,
+          money: req.body.inventaire.monney.value,
           sell: req.body.inventaire.sell
         }
         

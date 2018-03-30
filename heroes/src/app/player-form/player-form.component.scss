@@ -1,6 +1,27 @@
-.ctnPlayer{
-  .imgCtn{
-    height: 150px;
-    width: 150px;
+.ctnPlayer {
+  .persoCtn {
+    text-align: center;
+    .imgCtn {
+      input{
+        display: none;
+      }
+      img {
+        height: 250px;
+        width: 200px;
+      }
+    }
+  }
+}
+
+.descriptionClass {
+  h2.titleOfClass:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.nameChoice{
+  text-align: -webkit-center;
+  input{
+    width:300px;
   }
 }

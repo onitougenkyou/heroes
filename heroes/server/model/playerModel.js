@@ -17,7 +17,8 @@ var playerSchema = new Schema({
       agility: { type: Number },
       perception: { type: Number },
       luck: { type: Number }
-    }
+    },
+    description: {type: String}
   },
   inventaire: {
     weapon: {
