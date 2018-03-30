@@ -3,9 +3,11 @@ var mongo = require('mongoose');
 var Schema = mongo.Schema;
 
 var playerSchema = new Schema({
+  id: {type: Number},
   name: { type: String },
   level: { type: Number },
   experience: { type: Number },
+  isAlive: { type: Boolean },
   class: {
     name: { type: String },
     attributes: {

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/do';
 export class PlayerService {
 
   constructor(private http: Http) { }
-   
+
   savePlayer(player) {
     return this.http.post('http://localhost:8080/api/savePlayer/', player).map((response: Response) => response.json())
   }
@@ -19,6 +19,6 @@ export class PlayerService {
   }
 
   deletePlayer(id) {
-    return this.http.post('http://localhost:8080/api/deletePlayer/', {'id':id}).map((response: Response)=>response.json())
+    return this.http.post('http://localhost:8080/api/deletePlayer/', { 'id': id }).map((response: Response) => response.json())
   }
 }
