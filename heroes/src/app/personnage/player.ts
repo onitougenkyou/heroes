@@ -10,9 +10,9 @@ export class Player {
   experience: number;
   class: Class;
   inventaire: Inventaire;
-  isAlive: Boolean;
+  isAlive: boolean;
 
-  constructor(nameC: string, levelC: number, experienceC: number, classC: Class, inventaireC: Inventaire, isAliveC: Boolean) {
+  constructor(nameC: string, levelC: number, experienceC: number, classC: Class, inventaireC: Inventaire, isAliveC: boolean) {
     this.name = nameC;
     this.level = levelC;
     this.experience = experienceC;

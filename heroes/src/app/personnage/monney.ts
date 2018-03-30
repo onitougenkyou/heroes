@@ -1,7 +1,7 @@
 export class Monney {
-  value: Number;
+  value: number;
 
-  constructor(valueC: Number) {
-    valueC = this.value;
+  constructor(valueC: number) {
+    this.value = valueC ;
   }
 }

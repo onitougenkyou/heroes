@@ -7,9 +7,9 @@ export class Inventaire {
   weapon: Weapon;
   armor: Defense;
   monney: Monney;
-  sell: Sell;
+  sell: Array<Sell>;
 
-  constructor(weaponC: Weapon, armorC: Defense, monneyC: Monney, sellC: Sell) {
+  constructor(weaponC: Weapon, armorC: Defense, monneyC: Monney, sellC: Array<Sell>) {
     this.weapon = weaponC;
     this.armor = armorC;
     this.monney = monneyC;
