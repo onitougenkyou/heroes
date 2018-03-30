@@ -3,3 +3,5 @@ Jquery = npm install jquery
 express = npm install express
 mongoose = npm install mongoose
 body-parser = npm install body-parser
+
+class : http://www.pathfinder-fr.org/Wiki
