@@ -5,7 +5,7 @@
 
       <!-- Choix classe -->
       <div class="form-group row">
-        <div class="ctnPlayer col-xs-1" *ngFor="let player of playerArray">
+        <div class="ctnPlayer col-md-3" *ngFor="let player of playerArray">
           <div class="persoCtn" (click)="setUserChoice(player)">
             <div class="imgCtn">
               <label for="class{{player.class.name}}"><img src="./assets/img/{{player.class.name}}.jpg" /></label>
