@@ -50,12 +50,13 @@ img.home {
   background:#25211E;
 
 .imgCtnHeader{
-  height: 300px;
-  width: 65%;
-  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
   img{
     height: 100%;
-    width: 100%;
+    width: 550px;
     border: 1px solid wheat;
   }
 }

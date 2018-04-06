@@ -14,6 +14,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PlayerFormComponent } from './player-form/player-form.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { LoginComponent } from './login/login.component';
     PlayerFormComponent,
     HeaderComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { LoginComponent } from './login/login.component';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    AppRoutingModule,
   ],
   providers: [PlayerService],
   bootstrap: [AppComponent]
