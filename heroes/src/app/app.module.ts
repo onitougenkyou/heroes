@@ -13,13 +13,15 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PlayerFormComponent } from './player-form/player-form.component';
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,7 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   providers: [PlayerService],
   bootstrap: [AppComponent]
