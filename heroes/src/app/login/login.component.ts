@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
 
   public userName: string;
   public userPassword: string;
+  public isLoggin: boolean = true;
 
   constructor() { }
 
