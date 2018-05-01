@@ -1,0 +1,10 @@
+<div *ngFor="let class of classArray"
+     class="card text-white bg-dark mb-3 border-danger"
+     style="width: 18rem; margin-bottom: 5px;">
+  <h3 class="card-header">
+    <a href="#" [routerLink]="['/players', class.id]">{{class.name}}</a>
+  </h3>
+  <div class="card-body">
+    <p class="card-text">{{class.description}}</p>
+  </div>
+</div>

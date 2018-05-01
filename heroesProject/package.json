@@ -1,5 +1,5 @@
 {
-  "name": "heroes",
+  "name": "heroes-project",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -21,15 +21,8 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "angular2-jwt": "^0.2.3",
-    "body-parser": "^1.18.2",
-    "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",
-    "express": "^4.16.3",
-    "jquery": "^3.3.1",
-    "mongoose": "^5.0.12",
-    "ngx-bootstrap": "^2.0.3",
-    "nodemon": "^1.17.3",
+    "jwt-decode": "^2.2.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

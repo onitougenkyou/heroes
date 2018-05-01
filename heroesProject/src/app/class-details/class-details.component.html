@@ -1,0 +1,37 @@
+<div *ngIf="persoDetails">
+  <div class="card text-white bg-dark mb-3" style="max-width: 80%; margin:auto; margin-top:25px;">
+    <div class="card-header">
+      <h2>{{persoDetails.name}}</h2>
+    </div>
+    <div class="card-body">
+      <h5>Attributs</h5>
+      <ul class="card-text" style="list-style-type:none">
+        <li> Force : {{persoDetails.attributs.force}}</li>
+        <li> Intelligence : {{persoDetails.attributs.intelligence}}</li>
+        <li> Agilité : {{persoDetails.attributs.agilite}}</li>
+        <li> Perception : {{persoDetails.attributs.perception}}</li>
+        <li> Endurance : {{persoDetails.attributs.endurance}}</li>
+        <li> Chance : {{persoDetails.attributs.chance}}</li>
+      </ul>
+      <h5>Arme</h5>
+      <p class="card-text">{{persoDetails.arme}}</p>
+      <h5 class="card-title">Description</h5>
+      <p class="card-text">{{persoDetails.description}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="errorMessage">
+  <div class="card text-white bg-danger mb-3" style="max-width: 80%; margin:auto; margin-top:25px;">
+    <div class="card-header">
+      <h1>Erreur</h1>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{errorMessage}}</h5>
+    </div>
+  </div>
+</div>
+
+<div>
+  <button class="btn btn-dark" routerLink="/player">Retour liste</button>
+</div>

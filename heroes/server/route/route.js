@@ -4,6 +4,7 @@ app = express();
 player = require('../model/playerModel');
 var mongo = require("mongoose");
 var model = mongo.model('players');
+var user = mongo.model('User');
 
 /**
  * Sauvegarde de nouveau joueur ou mise à jour si aucun ID n'existe. 
