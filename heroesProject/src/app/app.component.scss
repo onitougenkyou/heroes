@@ -3,6 +3,8 @@
   src: url('assets/font/ring/RINGM___.TTF')
 }
 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -14,8 +16,9 @@ nav {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background: #b7b0ae;
+  background: #8c0101;
   transition: all 0.3s;
+  border: 1px solid rgba(0,0,0,1);
 
   img {
     height: 50px;
