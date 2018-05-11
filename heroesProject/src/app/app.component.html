@@ -1,34 +1,34 @@
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav>
+  <img class="home" src="assets/img/icon.jpg" />
   <ul class="navbar-nav">
     <li class="nav-item active">
       <a class="nav-link" href="#" routerLink="/">Acceuil</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" *ngIf="authService.userIsAdmin()" routerLink="/player/add">Ajout</a>
+    <li class="nav-item" *ngIf="authService.userIsAdmin()">
+      <a class="nav-link" href="#"  routerLink="/administration"><img src="assets/open-iconic/svg/cog.svg"></a> <!--Page vers administration--> 
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/profil" *ngIf="authService.userIsLoggedIn()">Profil</a>
+    <li class="nav-item" *ngIf="authService.userIsLoggedIn()">
+      <a class="nav-link" href="#" routerLink="/profil"><img src="assets/open-iconic/svg/person.svg"></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/login" *ngIf="!authService.userIsLoggedIn()">Se connecter</a>
+    <li class="nav-item" *ngIf="!authService.userIsLoggedIn()">
+      <a class="nav-link" href="#" routerLink="/login"><img src="assets/open-iconic/svg/account-login.svg"></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" (click)="authService.logOut()" *ngIf="authService.userIsLoggedIn()">Se déconnecter</a>
+    <li class="nav-item" *ngIf="authService.userIsLoggedIn()">
+      <a class="nav-link" href="#" (click)="authService.logOut()"><img src="assets/open-iconic/svg/account-logout.svg"></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/register" *ngIf="!authService.userIsLoggedIn()">S'inscrire</a>
+    <li class="nav-item" *ngIf="!authService.userIsLoggedIn()">
+      <a class="nav-link" href="#" routerLink="/register">S'inscrire</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item lastChild">
       <a class="nav-link" href="#" routerLink="/about">A propos</a>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/player">Player</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/player/:id">Détail</a>
-    </li>
+    <!--<li class="nav-item">
+    <a class="nav-link" href="#" routerLink="/player">Player</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" routerLink="/player/:id">Détail</a>
+  </li>-->
   </ul>
 </nav>
 

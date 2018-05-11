@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ClassService } from '../services/class.service';
 import { AuthService } from '../services/auth.service';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-class-add-form',

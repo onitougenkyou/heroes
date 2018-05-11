@@ -1,73 +1,89 @@
+<h2>Ajout d'une nouvelle classe</h2>
+
 <div class="panel-body" *ngIf="userIsLoggedIn">
   <form [formGroup]="form" (ngSubmit)="createClass(form.value)">
-    <div class="form-group col-sm-6">
-      <label for="name">Nom</label>
-      <input type="text"
-             name="name"
-             class="form-control"
-             placeholder="Nom de la classe"
-             formControlName="name" />
-      <label for="force">force</label>
-      <input type="number"
-             name="force"
-             class="form-control"
-             placeholder="force de la classe"
-             formControlName="force" />
-      <label for="intelligence">intelligence</label>
-      <input type="number"
-             name="intelligence"
-             class="form-control"
-             placeholder="intelligence de la classe"
-             formControlName="intelligence" />
-      <label for="agilite">aglite</label>
-      <input type="number"
-             name="agilite"
-             class="form-control"
-             placeholder="agilite de la classe"
-             formControlName="agilite" />
-      <label for="endurance">endurance</label>
-      <input type="number"
-             name="endurance"
-             class="form-control"
-             placeholder="endurance de la classe"
-             formControlName="endurance" />
-      <label for="perception">Perception</label>
-      <input type="number"
-             name="perception"
-             class="form-control"
-             placeholder="Perception de la classe"
-             formControlName="perception" />
-      <label for="chance">Chance</label>
-      <input type="number"
-             name="chance"
-             class="form-control"
-             placeholder="Chance de la classe"
-             formControlName="chance" />
-      <label for="vie">Vie</label>
-      <input type="number"
-             name="vie"
-             class="form-control"
-             placeholder="Vie de la classe"
-             formControlName="vie" />
-    </div>
-
-    <div class="form-group col-sm-6">
-      <label for="weapon">Armes</label>
-      <select name="weapon" formControlName="arme">
-        <option *ngFor="let wp of weaponTypes" [value]="wp.name">{{wp.name}}</option>        
-      </select>
-    </div>
-
-    <div class="form-group col-sm-6">
-      <label for="description">Description</label>
-      <textarea name="description"
-                cols="30"
-                rows="10"
-                placeholder="Description de la classe"
-                formControlName="description"></textarea>
-    </div>
-
     <div class="form-group col-sm-12">
+      <div class="item">
+        <label for="name">Nom</label>
+        <input type="text"
+               name="name"
+               class="form-control"
+               placeholder="Nom de la classe"
+               formControlName="name" />
+      </div>
+      <div class="item">
+        <label for="force">force</label>
+        <input type="number"
+               name="force"
+               class="form-control"
+               placeholder="force de la classe"
+               formControlName="force" />
+      </div>
+      <div class="item">
+        <label for="intelligence">intelligence</label>
+        <input type="number"
+               name="intelligence"
+               class="form-control"
+               placeholder="intelligence de la classe"
+               formControlName="intelligence" />
+      </div>
+      <div class="item">
+        <label for="agilite">aglite</label>
+        <input type="number"
+               name="agilite"
+               class="form-control"
+               placeholder="agilite de la classe"
+               formControlName="agilite" />
+      </div>
+      <div class="item">
+        <label for="endurance">endurance</label>
+        <input type="number"
+               name="endurance"
+               class="form-control"
+               placeholder="endurance de la classe"
+               formControlName="endurance" />
+      </div>
+      <div class="item">
+        <label for="perception">Perception</label>
+        <input type="number"
+               name="perception"
+               class="form-control"
+               placeholder="Perception de la classe"
+               formControlName="perception" />
+      </div>
+      <div class="item">
+        <label for="chance">Chance</label>
+        <input type="number"
+               name="chance"
+               class="form-control"
+               placeholder="Chance de la classe"
+               formControlName="chance" />
+      </div>
+      <div class="item">
+        <label for="vie">Vie</label>
+        <input type="number"
+               name="vie"
+               class="form-control"
+               placeholder="Vie de la classe"
+               formControlName="vie" />
+      </div>
+    </div>
+      <div class="form-group col-sm-12">
+        <label for="weapon">Armes</label>
+        <select name="weapon" formControlName="arme">
+          <option *ngFor="let wp of weaponTypes" [value]="wp.name">{{wp.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-sm-12" style="margin:auto">
+        <label for="description">Description</label>
+        <textarea name="description"
+                  cols="30"
+                  rows="10"
+                  placeholder="Description de la classe"
+                  formControlName="description"></textarea>
+      </div>
+    <div class="form-group col-sm-12 btnCtn">
       <button type="submit" class="btn btn-success">Créer classe</button>
     </div>
 

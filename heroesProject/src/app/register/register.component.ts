@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  errorMessage = null;
+  formIsInvalid: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -19,15 +22,22 @@ export class RegisterComponent implements OnInit {
     this.authService.register(formData)
       .subscribe(
       data => this.handleRegisterSuccess(data),
-        error => this.handleRegisterFailure(error)
+      error => this.handleRegisterFailure(error)
       )
   }
 
   handleRegisterSuccess(response) {
-    this.router.navigate(['/']);
+    if (response.success === false) {
+      console.log(response);
+      this.handleRegisterFailure(response.message);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   handleRegisterFailure(error) {
+    this.formIsInvalid = true;
+    this.errorMessage = error;
     console.error('ERREUR ',error);
   }
 }

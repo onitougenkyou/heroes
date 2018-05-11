@@ -1,0 +1,16 @@
+.form-group {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  .item {
+    padding: 15px;
+    input{
+      width: 140px;
+    }
+  }
+}
+
+.btnCtn{
+  margin-top: 10px;
+  margin-left: 30%;
+}

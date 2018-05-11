@@ -11,6 +11,7 @@ export class AuthenticationComponent implements OnInit {
   local = null;
   isAuthenticated: boolean = false;
   message = null;
+  loginFail: boolean = false;
 
   constructor(private authService: AuthService) { }
 
@@ -32,6 +33,7 @@ export class AuthenticationComponent implements OnInit {
         this.handleLoginSuccess(data);
       },
       error => {
+        console.log(error);
         this.handleLoginFailer(error);
       });
   }
@@ -43,6 +45,8 @@ export class AuthenticationComponent implements OnInit {
   }
 
   handleLoginFailer(error) {
+    this.loginFail = true;
+    this.message = "Erreur d'identifiant";
     console.error('fail', error);
   }
 }

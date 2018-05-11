@@ -1,20 +1,71 @@
+<div class="btnCtn">
+  <button class="btn text-white" style="background:#7a0000" routerLink="/player">Retour à la liste</button>
+</div>
+
 <div *ngIf="persoDetails">
-  <div class="card text-white bg-dark mb-3" style="max-width: 80%; margin:auto; margin-top:25px;">
+  <div class="card text-white mb-3" style="max-width: 80%; margin:auto; margin-top:25px; background: #7a0000">
     <div class="card-header">
       <h2>{{persoDetails.name}}</h2>
     </div>
+    <div class="card-body imageContent">
+      <img class="card-img-top" src="assets/class/{{persoDetails.name}}.jpg" alt="Card image cap">
+    </div>
     <div class="card-body">
-      <h5>Attributs</h5>
-      <ul class="card-text" style="list-style-type:none">
-        <li> Force : {{persoDetails.attributs.force}}</li>
-        <li> Intelligence : {{persoDetails.attributs.intelligence}}</li>
-        <li> Agilité : {{persoDetails.attributs.agilite}}</li>
-        <li> Perception : {{persoDetails.attributs.perception}}</li>
-        <li> Endurance : {{persoDetails.attributs.endurance}}</li>
-        <li> Chance : {{persoDetails.attributs.chance}}</li>
-      </ul>
-      <h5>Arme</h5>
-      <p class="card-text">{{persoDetails.arme}}</p>
+
+
+      <div class="card-body" style="display: flex;">
+        <div class="card-body">
+          <h4>Attributs</h4>
+          <ul class="card-text" style="list-style-type:none">
+            <li> Force : {{persoDetails.attributs.force}}</li>
+            <li> Intelligence : {{persoDetails.attributs.intelligence}}</li>
+            <li> Agilité : {{persoDetails.attributs.agilite}}</li>
+            <li> Perception : {{persoDetails.attributs.perception}}</li>
+            <li> Endurance : {{persoDetails.attributs.endurance}}</li>
+            <li> Chance : {{persoDetails.attributs.chance}}</li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <h4>Arme</h4>
+          <p class="card-text">{{persoDetails.inventaire.weapon.name}}</p>
+          <h5>Détail de l'arme</h5>
+          <ul class="card-text" style="list-style-type:none">
+            <li>Dommage : {{persoDetails.inventaire.weapon.dammage}}</li>
+            <li>Valeur : {{persoDetails.inventaire.weapon.value}}</li>
+            <li>Niveau requis : {{persoDetails.inventaire.weapon.levelMin}}</li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <h4>Armure</h4>
+          <p class="card-text">{{persoDetails.inventaire.defense.name}}</p>
+          <h5>Détail de l'armure</h5>
+          <ul class="card-text" style="list-style-type:none">
+            <li>Défense : {{persoDetails.inventaire.defense.defense}}</li>
+            <li>Valeur : {{persoDetails.inventaire.defense.value}}</li>
+            <li>Niveau requis : {{persoDetails.inventaire.defense.levelMin}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="text-align:center">
+        <h4>Inventaire</h4>
+      </div>
+      <div class="card-body" style="display: flex; text-align:center">
+        <div class="card-body">
+          <h4>Argent</h4>
+          <p class="card-text">Or : {{persoDetails.inventaire.monney}}</p>
+        </div>
+        <div class="card-body">
+          <h4>Objet à vendre</h4>
+          <div style="display: flex;">
+            <ul class="card-text" style="list-style-type:none" *ngFor="let sell of persoDetails.inventaire.sell">
+              <li>Nom : {{sell.name}}</li>
+              <li>Prix : {{sell.value}}</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
       <h5 class="card-title">Description</h5>
       <p class="card-text">{{persoDetails.description}}</p>
     </div>
@@ -30,8 +81,4 @@
       <h5 class="card-title">{{errorMessage}}</h5>
     </div>
   </div>
-</div>
-
-<div>
-  <button class="btn btn-dark" routerLink="/player">Retour liste</button>
 </div>

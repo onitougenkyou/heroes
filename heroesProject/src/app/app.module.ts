@@ -10,6 +10,7 @@ import { PersoClassListComponent } from './perso-class-list/perso-class-list.com
 
 import { ClassService } from './services/class.service';
 import { AuthService } from './services/auth.service';
+import { PlayerService } from './services/player.service';
 
 import { ClassAddFormComponent } from './class-add-form/class-add-form.component';
 import { HomeComponent } from './home/home.component';
@@ -18,6 +19,7 @@ import { AboutComponent } from './about/about.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { ProfilComponent } from './profil/profil.component';
 import { RegisterComponent } from './register/register.component';
+import { AdministrationComponent } from './administration/administration.component';
 
 
 const routes = [
@@ -28,7 +30,8 @@ const routes = [
   { path: 'about', component: AboutComponent },
   { path: 'login', component: AuthenticationComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profil', component: ProfilComponent }
+  { path: 'profil', component: ProfilComponent },
+  { path: 'administration', component: AdministrationComponent }
 ]
 
 @NgModule({
@@ -42,7 +45,8 @@ const routes = [
     AboutComponent,
     AuthenticationComponent,
     ProfilComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdministrationComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,7 @@ const routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ClassService, AuthService],
+  providers: [ClassService, AuthService, PlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
