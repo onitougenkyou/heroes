@@ -23,12 +23,14 @@ export class ClassService {
   }
 
   addClass(classData, token) {
+    console.log(classData);
     const requestOptions = this.authService.addAuthorizationHeader(token);
-
-    return this.http.post(this.base_url + "api/players", classData, requestOptions)
-      .map(res => {
-        this.classSubject.next(classData);
-      })
+    if (requestOptions) {
+      return this.http.post(this.base_url + "api/players", classData)
+        .map(res => {
+          this.classSubject.next(classData);
+        })
+    }
   }
 
   getOneClass(id) {

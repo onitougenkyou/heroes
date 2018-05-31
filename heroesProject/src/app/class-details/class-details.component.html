@@ -37,12 +37,12 @@
         </div>
         <div class="card-body">
           <h4>Armure</h4>
-          <p class="card-text">{{persoDetails.inventaire.defense.name}}</p>
+          <p class="card-text">{{persoDetails.inventaire.armor.name}}</p>
           <h5>Détail de l'armure</h5>
           <ul class="card-text" style="list-style-type:none">
-            <li>Défense : {{persoDetails.inventaire.defense.defense}}</li>
-            <li>Valeur : {{persoDetails.inventaire.defense.value}}</li>
-            <li>Niveau requis : {{persoDetails.inventaire.defense.levelMin}}</li>
+            <li>Défense : {{persoDetails.inventaire.armor.defense}}</li>
+            <li>Valeur : {{persoDetails.inventaire.armor.value}}</li>
+            <li>Niveau requis : {{persoDetails.inventaire.armor.levelMin}}</li>
           </ul>
         </div>
       </div>
@@ -59,10 +59,10 @@
           <h4>Objet à vendre</h4>
           <div style="display: flex;">
             <ul class="card-text" style="list-style-type:none" *ngFor="let sell of persoDetails.inventaire.sell">
-              <li>Nom : {{sell.name}}</li>
+              <li>Nom : {{sell.type}}</li>
               <li>Prix : {{sell.value}}</li>
             </ul>
-          </div>
+          </div>  
         </div>
 
       </div>

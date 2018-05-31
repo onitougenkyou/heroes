@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -13,7 +14,7 @@ export class AuthenticationComponent implements OnInit {
   message = null;
   loginFail: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     if (this.authService.userIsLoggedIn()) {
@@ -33,7 +34,6 @@ export class AuthenticationComponent implements OnInit {
         this.handleLoginSuccess(data);
       },
       error => {
-        console.log(error);
         this.handleLoginFailer(error);
       });
   }
@@ -42,6 +42,7 @@ export class AuthenticationComponent implements OnInit {
     this.local = response;
     this.refreshFlag();
     localStorage.setItem('local-data', JSON.stringify(response));
+    this.router.navigate(['/']);
   }
 
   handleLoginFailer(error) {

@@ -4,11 +4,31 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 let data = require('./class');
 const mongo = require("mongoose");
-player = require('./model/player');
-user = require('./model/user');
+
+// Models
+var playerModel = require('./model/player');
+var userModel = require('./model/user');
+var classModel = require('./model/class');
+
+// import model depuis mongoose
 var model = mongo.model('players');
 var user = mongo.model('User');
+var classM = mongo.model('Class');
+
+
 var validator = require("email-validator");
+const bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
+
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 // Connexion vers la base de données NoSQL
 var db = mongo.connect("mongodb://localhost:27017/player", function (err, response) {
@@ -25,18 +45,8 @@ users = [
 ];
 const secret = "dsffdgq785q1sdqfdsfq4561sdf23qsdqsdjhlkjmq1";
 
-const getAllClass = () => {
-  return [...addedClass, ...initialClass];
-}
-
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-type, Authorization');
-  next();
-
-});
 
 const api = express.Router();
 
@@ -47,24 +57,33 @@ const auth = express.Router();
 auth.post('/login', (req, res) => {
   if (req.body) {
     const email = req.body.email.toLocaleLowerCase();
-    const password = req.body.password.toLocaleLowerCase();
+    var password = req.body.password;
     const index = users.findIndex(user => user.email === email);
-    if (index > -1 && users[index].password === password) {
-      let user = users[index];
-      let token = '';
-      console.log('User ------- ', user)
-      if (user.email === 'admin') {
-        token = jwt.sign({ iss: 'http://localhost:3000', role: 'admin', email: req.body.email, name: user.name }, secret);
+
+
+    user.findOne({ email: req.body.email }, function (err, userInfo) {
+      if (err) {
+        console.log('erreur');
       } else {
-        token = jwt.sign({ iss: 'http://localhost:3000', role: 'user', email: req.body.email, name: user.name }, secret);
+        //Comparaison des mots de passe
+        if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+
+          // Check si l'utilisateur est un admin ou non
+          if (user.email === 'admin') {
+            token = jwt.sign({ iss: 'http://localhost:3000', role: userInfo.role, email: userInfo.email, name: userInfo.username }, secret);
+          } else {
+            token = jwt.sign({ iss: 'http://localhost:3000', role: userInfo.role, email: userInfo.email, name: userInfo.username }, secret);
+          }
+          res.json({ success: true, token: token });
+        } else {
+          res.status(401).json({ success: false, message: 'Identifiants incorrect' });
+        }
       }
-      res.json({ success: true, token: token });
-    } else {
-      res.status(401).json({ success: false, message: 'Identifiants incorrect' });
-    }
+    });
   } else {
     res.status(500).json({ success: false, message: "Données manquantes" });
   }
+
 });
 
 // Inscription
@@ -75,13 +94,30 @@ auth.post('/register', (req, res) => {
     const password = req.body.password.toLocaleLowerCase().trim();
     const confirmPassword = req.body.confirmPassword.toLocaleLowerCase().trim();
     const name = req.body.name.trim();
+    // Vérification que les mots de passe sont identiques
     if (password !== confirmPassword) {
-      res.json({ success: false, message: { type: "Password", content: "Mauvaise correspondance entre les mots de passe"} });
+      res.json({ success: false, message: { type: "Password", content: "Mauvaise correspondance entre les mots de passe" } });
     } if (!validator.validate(email)) {
-      res.json({ success: false, message: { type: "Mail", content: "Format invalide"} })
+      res.json({ success: false, message: { type: "Mail", content: "Format invalide" } })
     } else {
-      users = [{ id: Date.now(), email: email, password: password, name: name }, ...users];
-      res.json({ success: true, users: users });
+      // Récupération des données pour sauvegarde
+      var userSchema = new user({
+        email: req.body.email,
+        username: req.body.name,
+        password: req.body.password,
+        role: "user"
+      });
+
+      // Sauvegarde de l'utilisateur
+      userSchema.save(function (err) {
+        if (err) {
+          res.send(err);
+          console.log("Une erreur c'est produite", err);
+        } else {
+          res.send({ user });
+          console.log("Enregistrement bien effectuer");
+        }
+      });
     }
   } else {
     res.json({ success: false, message: "Creation failure" });
@@ -90,7 +126,13 @@ auth.post('/register', (req, res) => {
 
 // Récupérer les joueurs du fichier json
 api.get('/players', (req, res) => {
-  res.json(getAllClass());
+  classM.find({}, function (err, data) {
+    if (err) {
+      res.json({ success: false, message: "Une erreur est survenue lors de la récupération des classes" });
+    } else {
+      res.send(data);
+    }
+  });
 });
 
 const checkUserToken = (req, res, next) => {
@@ -110,28 +152,75 @@ const checkUserToken = (req, res, next) => {
   next();
 }
 
-
-api.post('/players', checkUserToken, (req, res) => {
-  const perso = req.body;
-  addedClass = [perso, ...addedClass];
-  res.json(perso);
-});
+// Ajout en base des classes jouable par le joueur
+api.post('/players', (req, res) => {
 
 
-api.get('/players/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const perso = getAllClass().filter(j => j.id === id);
-  if (perso.length === 1) {
-    res.json({ success: true, class: perso[0] });
+  if (req.body) {
+    var id = req.body.id;
+    // Ajout des datas pour la classe
+    var classSchema = new classM({
+      id: req.body.id,
+      name: req.body.name,
+      attributs: {
+        vie: req.body.attributs.vie,
+        force: req.body.attributs.force,
+        agilite: req.body.attributs.agilite,
+        perception: req.body.attributs.perception,
+        intelligence: req.body.attributs.intelligence,
+        chance: req.body.attributs.chance
+      },
+      inventaire: {
+        armor: {
+          name: req.body.inventaire.armor.armorType,
+          defense: req.body.inventaire.armor.armorResistance,
+          value: req.body.inventaire.armor.armorValue,
+          levelMin: req.body.inventaire.armor.armorLevel
+        },
+        weapon: {
+          name: req.body.inventaire.weapon.weaponType,
+          dammage: req.body.inventaire.weapon.weaponDammage,
+          value: req.body.inventaire.weapon.weaponValue,
+          levelMin: req.body.inventaire.weapon.weaponLevel
+        },
+        monney: req.body.inventaire.monney,
+        sell: req.body.inventaire.sell
+      },
+      description: req.body.description
+    });
+
+    // Sauvegarde de l'utilisateur
+    classSchema.save(function (err, data) {
+      if (err) {
+        console.log("Une erreur c'est produite", err);
+        return res.json({ success: false, message: "Erreur lors de l'ajout" })
+      } else {
+        console.log("Enregistrement bien effectuer", data);
+        return res.json({ success: true, message: "Classe bien ajoutée" })
+      }
+    });
   } else {
-    res.json({ success: false, message: 'Une erreur est survenue, le personnage demander n\'existe pas' });
+    return res.json({ success: false, message: "Creation failure" });
   }
 
 });
 
+api.get('/players/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  classM.findOne({ id: id }, function (err, classInfo) {
+    if (err) {
+      console.log('Erreur', err);
+    } else {
+      console.log('data', classInfo);
+      res.json({ success: true, class: classInfo });
+    }
+  });
+});
+
 
 /**
- * Sauvegarde de nouveau joueur ou mise à jour si aucun ID n'existe. 
+ * Sauvegarde de nouveau joueur ou mise à jour si ID existe. 
  */
 app.post("/api/savePlayer", function (req, res, next) {
   console.log('coucou route save');
@@ -143,6 +232,7 @@ app.post("/api/savePlayer", function (req, res, next) {
         name: req.body.name,
         level: req.body.level,
         experience: req.body.experience,
+        isAlive: req.body.isALive,
         class: {
           name: req.body.class.name,
           attributes: {

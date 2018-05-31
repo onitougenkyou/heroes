@@ -29,6 +29,7 @@ export class ClassDetailsComponent implements OnInit {
 
   handleServerResponse(response) {
     if (response.success) {
+      console.log('RES',response.class);
       this.persoDetails = response.class;
     } else {
       this.errorMessage = response.message;

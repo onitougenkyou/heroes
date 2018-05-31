@@ -1,14 +1,20 @@
-.ctnBtnModal {
-  margin: 15px;
-}
+nav {
+  .nav.nav-tabs {
+    border-bottom: 1px solid #8c0101;
+    margin-top: 10px;
 
-.openFormAddClass {
-  background: #8c0101;
-}
+    a.active {
+      color: #000101;
+      background-color: #8c0101;
+      border: 1px solid black;
+      border-bottom: 1px solid #8c0101;
+    }
 
-
-.close {
-  span {
-    color: #000;
+    a {
+      color: #000101;
+      background: #5f0300;
+      border: 1px solid black;
+      border-bottom: 1px solid #8c0101;
+    }
   }
 }

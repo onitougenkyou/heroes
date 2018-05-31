@@ -1,24 +1,35 @@
-.form-group {
-  display: grid;
-  grid-template-columns: auto auto auto;
+.panel-body {
+  input {
+    width: 150px;
+  }
 
-  .item {
-    padding: 15px;
-    input{
-      width: 140px;
+  select {
+    color: black;
+
+    option {
+      color: black;
     }
   }
-}
 
-.btnCtn{
-  margin-top: 10px;
-  margin-left: 30%;
-}
+  textarea {
+    color: black;
+  }
 
-* {
-  color: #000;
-}
+  .attributs {
+    * {
+      display: inline-grid;
+      margin: 5px;
+    }
+  }
 
-.create{
-  color: #fff;
+  .inventaire {
+    * {
+      display: inline-grid;
+      margin: 5px;
+    }
+  }
+
+  .description {
+    display: grid;
+  }
 }

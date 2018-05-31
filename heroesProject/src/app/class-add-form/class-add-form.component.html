@@ -1,88 +1,168 @@
-<h2>Ajout d'une nouvelle classe</h2>
+<h2 class="titleForm">Ajout d'une nouvelle classe</h2>
 
 <div class="panel-body" *ngIf="userIsLoggedIn">
   <form [formGroup]="form" (ngSubmit)="createClass(form.value)">
     <div class="form-group col-sm-12">
-      <div class="item">
-        <label for="name">Nom</label>
-        <input type="text"
-               name="name"
-               class="form-control"
-               placeholder="Nom de la classe"
-               formControlName="name" />
+      <!-- Nom de la classe -->
+      <div class="nameClass">
+        <div class="item">
+          <h4>Nom de la classe</h4>
+          <input type="text"
+                 name="name"
+                 class="form-control"
+                 placeholder="Nom de la classe"
+                 formControlName="name" />
+        </div>
       </div>
-      <div class="item">
-        <label for="force">force</label>
-        <input type="number"
-               name="force"
-               class="form-control"
-               placeholder="force de la classe"
-               formControlName="force" />
-      </div>
-      <div class="item">
-        <label for="intelligence">intelligence</label>
-        <input type="number"
-               name="intelligence"
-               class="form-control"
-               placeholder="intelligence de la classe"
-               formControlName="intelligence" />
-      </div>
-      <div class="item">
-        <label for="agilite">aglite</label>
-        <input type="number"
-               name="agilite"
-               class="form-control"
-               placeholder="agilite de la classe"
-               formControlName="agilite" />
-      </div>
-      <div class="item">
-        <label for="endurance">endurance</label>
-        <input type="number"
-               name="endurance"
-               class="form-control"
-               placeholder="endurance de la classe"
-               formControlName="endurance" />
-      </div>
-      <div class="item">
-        <label for="perception">Perception</label>
-        <input type="number"
-               name="perception"
-               class="form-control"
-               placeholder="Perception de la classe"
-               formControlName="perception" />
-      </div>
-      <div class="item">
-        <label for="chance">Chance</label>
-        <input type="number"
-               name="chance"
-               class="form-control"
-               placeholder="Chance de la classe"
-               formControlName="chance" />
-      </div>
-      <div class="item">
-        <label for="vie">Vie</label>
-        <input type="number"
-               name="vie"
-               class="form-control"
-               placeholder="Vie de la classe"
-               formControlName="vie" />
+      <!-- Attributs de la classe -->
+      <div class="attributs">
+        <div class="item">
+          <label for="force">force</label>
+          <input type="number"
+                 name="force"
+                 class="form-control"
+                 placeholder="force de la classe"
+                 formControlName="force" />
+        </div>
+        <div class="item">
+          <label for="intelligence">intelligence</label>
+          <input type="number"
+                 name="intelligence"
+                 class="form-control"
+                 placeholder="intelligence de la classe"
+                 formControlName="intelligence" />
+        </div>
+        <div class="item">
+          <label for="agilite">aglite</label>
+          <input type="number"
+                 name="agilite"
+                 class="form-control"
+                 placeholder="agilite de la classe"
+                 formControlName="agilite" />
+        </div>
+        <div class="item">
+          <label for="endurance">endurance</label>
+          <input type="number"
+                 name="endurance"
+                 class="form-control"
+                 placeholder="endurance de la classe"
+                 formControlName="endurance" />
+        </div>
+        <div class="item">
+          <label for="perception">Perception</label>
+          <input type="number"
+                 name="perception"
+                 class="form-control"
+                 placeholder="Perception de la classe"
+                 formControlName="perception" />
+        </div>
+        <div class="item">
+          <label for="chance">Chance</label>
+          <input type="number"
+                 name="chance"
+                 class="form-control"
+                 placeholder="Chance de la classe"
+                 formControlName="chance" />
+        </div>
+        <div class="item">
+          <label for="vie">Vie</label>
+          <input type="number"
+                 name="vie"
+                 class="form-control"
+                 placeholder="Vie de la classe"
+                 formControlName="vie" />
+        </div>
       </div>
     </div>
-      <div class="form-group col-sm-12">
-        <label for="weapon">Armes</label>
-        <select name="weapon" formControlName="arme">
-          <option *ngFor="let wp of weaponTypes" [value]="wp.name">{{wp.name}}</option>
+    <!-- Inventaire de la classe -->
+    <div class="form-group col-sm-12 inventaire">
+      <div class="weaponCtn">
+        <h4 class="weaponTitle">Armes</h4>
+        <select class="choiceUser" name="weapon" formControlName="weaponType">
+          <option *ngFor="let wp of weaponTypes" [value]="wp.type">{{wp.type}}</option>
         </select>
       </div>
-
-      <div class="form-group col-sm-12" style="margin:auto">
-        <label for="description">Description</label>
-        <textarea name="description"
-                  cols="30"
-                  rows="10"
-                  placeholder="Description de la classe"
-                  formControlName="description"></textarea>
+      <div class="weaponDammageCtn">
+        <h4 class="weaponDammageTitle">Dommage de l'arme</h4>
+        <input type="number"
+               name="weaponDammageValue"
+               class="form-control"
+               placeholder="Dommage de l'arme"
+               formControlName="weaponDammageValue" />
       </div>
+      <div class="valueWeaponCtn">
+        <h4 class="valueWeaponTitle">Valeur de l'arme</h4>
+        <input type="number"
+               name="valueWeapon"
+               class="form-control"
+               placeholder="Valeur de l'arme"
+               formControlName="valueWeapon" />
+      </div>
+      <div class="weaponLevel">
+        <h4 class="levelArmorTitle">Niveau requis pour l'arme</h4>
+        <input type="number"
+               name="weaponLevel"
+               class="form-control"
+               placeholder="Niveau requis de l'arme"
+               formControlName="weaponLevel" />
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 inventaire">
+      <div class="armorCtn">
+        <h4>Défense</h4>
+        <select class="choiceUser" name="armor" formControlName="armorType">
+          <option *ngFor="let dp of armorType" [value]="dp.type">{{dp.type}}</option>
+        </select>
+      </div>
+      <div class="armorResistanceValueCtn">
+        <h4 class="armorResistanceTitle">Résistance de l'armure</h4>
+        <input type="number"
+               name="armorResistanceValue"
+               class="form-control"
+               placeholder="Résistance de l'armure"
+               formControlName="armorResistanceValue" />
+      </div>
+      <div class="valueArmorCtn">
+        <h4 class="armorValueTitle">Valeur de l'armure</h4>
+        <input type="number"
+               name="armorValue"
+               class="form-control"
+               placeholder="Valeur de l'armure"
+               formControlName="armorValue" />
+      </div>
+      <div class="armorLevel">
+        <h4 class="levelArmorTitle">Niveau requis pour l'armure</h4>
+        <input type="number"
+               name="armorLevel"
+               class="form-control"
+               placeholder="Niveau requis de l'armure"
+               formControlName="armorLevel" />
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 inventaire">
+      <div class="monneyCtn">
+        <h4 class="monneyTitle">Argent</h4>
+        <input type="number"
+               name="monney"
+               class="form-control"
+               placeholder="Argent de départ"
+               maxlength="25"
+               formControlName="monney" />
+      </div>
+    </div>
+
+    <!-- Description de la classe -->
+    <div class="form-group col-sm-12 description">
+      <label for="description">Description</label>
+      <textarea name="description"
+                cols="30"
+                rows="10"
+                placeholder="Description de la classe"
+                formControlName="description"></textarea>
+    </div>
+    <!-- Boutton send -->
     <div class="form-group col-sm-12 btnCtn">
       <button type="submit" class="btn btn-success create" data-dismiss="modal">Créer classe</button>
     </div>

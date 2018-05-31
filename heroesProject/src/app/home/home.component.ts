@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 export class HomeComponent implements OnInit {
 
   user = null;
+  isLoggin: boolean = false;
 
   constructor(private authService: AuthService) { }
 
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
     if (this.authService.userIsLoggedIn()) {
       const localToken = JSON.parse(localStorage.getItem('local-data'));
       this.user = this.authService.decodeToken(localToken.token);
-      console.log('localStorage', this.user)
+      console.log(this.user);
+      this.isLoggin = true;
     }
   }
 

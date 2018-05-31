@@ -13,10 +13,17 @@ export class ClassAddFormComponent implements OnInit {
 
   public form: FormGroup;
   weaponTypes = [
-    { name: 'hache' },
-    { name: 'épée' },
-    { name: 'arc' },
-    { name: 'baton magique' }
+    { type: 'hache' },
+    { type: 'épée' },
+    { type: 'arc' },
+    { type: 'baton magique' }
+  ];
+
+  armorType = [
+    { type: 'Armure de cuir' },
+    { type: 'Robe de mage' },
+    { type: 'Armure de fer' },
+    { type: 'Côte de maille' }
   ];
 
   userIsLoggedIn: boolean = false;
@@ -35,7 +42,15 @@ export class ClassAddFormComponent implements OnInit {
       perception: 0,
       chance: 0,
       vie: 0,
-      arme: '',
+      weaponType: '',
+      weaponDammageValue:0,
+      valueWeapon: 0,
+      weaponLevel: 0,
+      armorType: '',
+      armorResistanceValue: 0,
+      armorValue: 0,
+      armorLevel: 0,
+      monney: 0,
       description: ""
     });
 
@@ -45,9 +60,8 @@ export class ClassAddFormComponent implements OnInit {
 
   createClass(classData) {
     const token = JSON.parse(localStorage.getItem('local-data')).token;
-    console.log(classData);
     let parseData = {
-      id: classData.id,
+      id: Date.now(),
       name: classData.name,
       attributs: {
         force: classData.force,
@@ -58,10 +72,24 @@ export class ClassAddFormComponent implements OnInit {
         chance: classData.chance,
         vie: classData.vie
       },
-      arme: classData.arme,
-      description: classData.description
+      inventaire: {
+        weapon: {
+          weaponType: classData.weaponType,
+          weaponDammage: classData.weaponDammageValue,
+          weaponValue: classData.valueWeapon,
+          weaponLevel: classData.weaponLevel
+        },
+        armor: {
+          armorType: classData.armorType,
+          armorResistance: classData.armorResistanceValue,
+          armorValue: classData.armorValue,
+          armorLevel: classData.armorLevel
+        },
+        monney: classData.monney,
+        sell: [{ type: 'morceau de cuir usée', value: 2 }, {type: 'Morceau de fer', value: 4}]
+      },
+        description: classData.description
     };
-
     this.classService.addClass(parseData, token).subscribe();
     this.form.reset();
   }
