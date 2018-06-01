@@ -1,3 +1,35 @@
-*{
+* {
   color: white;
+}
+
+.ctnCard {
+  margin-top: 15px;
+
+  .card {
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+  }
+}
+
+.btnCtn {
+  text-align: center;
+
+  .errorRedirect {
+    font-family: heroes;
+    /*-webkit-text-fill-color: transparent;
+      background: -webkit-gradient(linear, left top, left bottom, from(#a73e0e), to(#ffe98b));
+      background: -o-gradient(linear,left top,left bottom,from(#243146),to(#a5b5c9));
+      -webkit-background-clip: text;*/
+    background: rgb(254, 245, 115);
+    background: linear-gradient(45deg, rgb(254, 245, 115) 0%, rgb(247, 209, 125) 25%, rgb(184, 68, 12) 51%, rgb(187, 96, 13) 100%);
+    border-radius: 7px;
+    padding: 10px;
+    font-size: 25px;
+
+    span {
+      -webkit-text-fill-color: transparent;
+      background: -webkit-gradient(linear, left top, left bottom, from(#364464), to(#0a0303));
+      background: -o-gradient(linear, left top, left bottom, from(#243146), to(#a5b5c9));
+      -webkit-background-clip: text;
+    }
+  }
 }

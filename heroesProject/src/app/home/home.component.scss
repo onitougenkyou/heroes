@@ -1,7 +1,12 @@
+@font-face {
+  font-family: 'philosopher';
+  src: url('assets/font/philosopher/Philosopher-Regular.ttf')
+}
+
 .ctn {
   padding: 2px;
   box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
-  font-family: heroes;
+  font-family: philosopher;
   -webkit-text-fill-color: transparent;
   background: -webkit-gradient(linear, left top, left bottom, from(#a73e0e), to(#ffe98b));
   background: -o-gradient(linear,left top,left bottom,from(#243146),to(#a5b5c9));
@@ -44,8 +49,21 @@
       }
     }
 
-    .lauchGame:hover{
-      cursor:pointer;
+    .lauchGame:hover {
+      cursor: pointer;
+    }
+  }
+
+  .titlePresPrincipe {
+    h5 {
+      margin-left: 35px;
+    }
+  }
+
+  .presContent{
+    .heroes{
+      text-transform: uppercase;
+      font-weight: bold;
     }
   }
 }

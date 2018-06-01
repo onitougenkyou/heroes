@@ -2,16 +2,12 @@
   <pre>{{decodeToken | json}}</pre>
 </div>
 
-<div *ngIf="!decodeToken">
-  <pre>Aucune données à afficher</pre>
-</div>
-
-
-<div *ngIf="isAdmin">
-  <pre>Je suis admin</pre>
-</div>
-
-
-<div *ngIf="!isAdmin">
-  <pre>Je suis pas admin</pre>
+<div *ngIf="!decodeToken" class="ctnCard">
+  <div  class="card text-white mb-3" style="max-width: 380px; background: #8c0101; margin: 0 auto">
+    <h5 class="card-header">Erreur</h5>
+    <div class="card-body">
+      <h5 class="card-title">Aucune information ne peut être afficher</h5>
+      <div class="btnCtn"><button class="errorRedirect"><span>Connectez-vous</span></button></div>
+    </div>
+  </div>
 </div>

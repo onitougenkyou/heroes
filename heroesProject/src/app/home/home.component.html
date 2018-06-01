@@ -2,16 +2,24 @@
 <div class="ctn">
   <div class="head">
 
-  </div>
+  </div> 
   <div class="title">
     <h1>Heroes - Claim your destiny</h1>
   </div>
   <!--<h1 *ngIf="isLoggin">{{user.name}}</h1>-->
-  <div class="newGame">
-  <button class="lauchGame" type="submit"><span>Nouvelle partie</span></button>
+  <div *ngIf="isLoggin" class="newGame">
+    <button class="lauchGame" type="submit"><span>Nouvelle partie</span></button>
   </div>
 
   <div class="presGame">
     <h3 class="sub-title">Présentation du jeu</h3>
+    <div class="ctnPres">
+      <div class="titlePresPrincipe">
+        <h5>Principe du jeu</h5>
+      </div>
+      <div class="presContent">
+        <p>Heroes - Claim your destiny est un jeu inspiré du système des "livres dont vous êtes le héro". <br />Il permet au joueur d'incarner un personnage dans le monde de TotoLand ou un mal ancestral c'est réveillé. Il devra progressé dans ce monde au travers de quêtes. Le gain d'expérience, le choix des équipements, l'attribution des points de compétences auront leurs importances. Mais surtout vos choix, car ne l'oubliez pas... <span class="heroes">Vous êtes le héro</span></p>
+      </div>
+    </div>
   </div>
 </div>
