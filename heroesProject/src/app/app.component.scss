@@ -15,9 +15,10 @@
   width: 100%;
   margin: 0 auto;
   margin-top: 25px;
-  border: 1px solid #8c0101;
   border-radius: 5px;
-  img{
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+
+  img {
     height: 100%;
     width: 100%;
   }
@@ -25,12 +26,14 @@
 
 
 nav {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 70px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background: #8c0101;
+  /*background: #8c0101;*/
+  background: #0c0100;
   transition: all 0.3s;
   border: 1px solid rgba(0,0,0,1);
 
@@ -53,6 +56,11 @@ ul {
     color: #b7b0ae;
     font-family: heroes;
     margin: 0 10px;
+    -webkit-text-fill-color: transparent;
+    background: -webkit-gradient(linear, left top, left bottom, from(#a73e0e), to(#ffe98b));
+    background: -o-gradient(linear,left top,left bottom,from(#243146),to(#a5b5c9));
+    -webkit-background-clip: text;
+
     a {
       color: #000;
 
@@ -63,7 +71,7 @@ ul {
     }
   }
 
-  .lastChild{
+  .lastChild {
     margin-right: 10px;
   }
 }
