@@ -16,7 +16,7 @@
   max-width: 380px;
   padding: 15px 35px 45px;
   margin: 0 auto;
-  background-color: #25211E;
+  background-color: #140601;
   border: 1px solid rgba(0,0,0,1);
   color: #B7B0AE;
   box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
@@ -57,6 +57,11 @@
     border-top-right-radius: 0;
   }
 
+  .btnLoginCtn {
+    background: #fff;
+    border-radius: 10px;
+  }
+
   .btnLogin {
     font-family: heroes;
     /*-webkit-text-fill-color: transparent;
@@ -64,15 +69,16 @@
       background: -o-gradient(linear,left top,left bottom,from(#243146),to(#a5b5c9));
       -webkit-background-clip: text;*/
     background: rgb(254, 245, 115);
-    background: linear-gradient(45deg, rgb(254, 245, 115) 0%, rgb(247, 209, 125) 25%, rgb(184, 68, 12) 51%, rgb(187, 96, 13) 100%);
+    background: linear-gradient(45deg, #18223e 0%, #647088 25%, #8ea4bc 51%, #212949 100%);
     border-radius: 7px;
     padding: 10px;
     font-size: 25px;
+    box-shadow: 5px 5px 20px #8ea4bc;
 
     span {
       -webkit-text-fill-color: transparent;
-      background: -webkit-gradient(linear, left top, left bottom, from(#364464), to(#0a0303));
-      background: -o-gradient(linear, left top, left bottom, from(#243146), to(#a5b5c9));
+      background: -webkit-gradient(linear, left top, left bottom, from(#000001), to(#000001));
+      background: -o-gradient(linear, left top, left bottom, from(#000001), to(#000001));
       -webkit-background-clip: text;
     }
   }
