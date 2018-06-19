@@ -26,16 +26,24 @@
 
 
 nav {
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  /*box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
   width: 100%;
-  height: 70px;
+  height: 70px;*/
   display: flex;
-  justify-content: flex-end;
+  /*justify-content: flex-end;
   align-items: center;
   /*background: #8c0101;*/
-  background: #0c0100;
+  /*background: #0c0100;
   transition: all 0.3s;
-  border: 1px solid rgba(0,0,0,1);
+  border: 1px solid rgba(0,0,0,1);*/
+  position: absolute;
+  z-index: 1;
+  width: 1000px;
+  left: 179px;
+  top: 491px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 
   img {
     height: 50px;
@@ -80,4 +88,11 @@ img.home {
   width: 200px;
   margin-right: auto;
   font-size: 2em;
+  margin-top: -9px;
+}
+
+img.navBackground {
+  position: absolute;
+  left: 74px;
+  top: 460px;
 }

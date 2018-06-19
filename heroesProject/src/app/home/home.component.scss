@@ -26,25 +26,30 @@
   }
 
   .newGame {
+    position: relative;
     text-align: center;
-    margin: 20px 0;
+
+    img {
+      position: absolute;
+      z-index: 1;
+      margin-top: -45px;
+    }
 
     .lauchGame {
       font-family: heroes;
-      /*-webkit-text-fill-color: transparent;
-      background: -webkit-gradient(linear, left top, left bottom, from(#a73e0e), to(#ffe98b));
-      background: -o-gradient(linear,left top,left bottom,from(#243146),to(#a5b5c9));
-      -webkit-background-clip: text;*/
-      background: rgb(254, 245, 115);
-      background: linear-gradient(45deg, rgb(254, 245, 115) 0%, rgb(247, 209, 125) 25%, rgb(184, 68, 12) 51%, rgb(187, 96, 13) 100%);
-      border-radius: 7px;
-      padding: 10px;
+      position: relative;
+      z-index: 10;
+      top: 25px;
+      left: 40px;
+      height: 51px;
+      background-color: transparent;
+      border: none;
       font-size: 25px;
 
       span {
         -webkit-text-fill-color: transparent;
-        background: -webkit-gradient(linear, left top, left bottom, from(#364464), to(#0a0303));
-        background: -o-gradient(linear, left top, left bottom, from(#243146), to(#a5b5c9));
+        background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#510b00));
+        background: -o-gradient(linear, left top, left bottom, from(#fff), to(#510b00));
         -webkit-background-clip: text;
       }
     }
@@ -60,9 +65,10 @@
     }
   }
 
-  .presContent{
+  .presContent {
     padding: 15px;
-    .heroes{
+
+    .heroes {
       text-transform: uppercase;
       font-weight: bold;
     }
