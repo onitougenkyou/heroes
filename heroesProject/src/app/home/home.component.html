@@ -8,7 +8,7 @@
   </div>
   <!--<h1 *ngIf="isLoggin">{{user.name}}</h1>-->
   <div *ngIf="isLoggin" class="newGame">
-    <button class="lauchGame" type="submit"><span>Nouvelle partie</span></button>
+    <button class="lauchGame" type="submit" (click)="test()"><span>Nouvelle partie</span></button>
   </div>
 
   <div class="presGame">
