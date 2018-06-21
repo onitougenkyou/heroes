@@ -1,7 +1,7 @@
 <div class="card-deck" style="max-width:90%; margin:auto; margin-top:25px;">
   <div *ngFor="let class of classArray" class="card text-white mb-3" style="margin:5px; background: #7a0000;">
     <div class="card-body">
-      <h5 class="card-title"><a href="#" [routerLink]="['/players', class.id]">{{class.name}}</a></h5>
+      <h5 class="card-title"><a href="#" [routerLink]="['/player', class.id]">{{class.name}}</a></h5>
       <div style=" max-height:350px; overflow: hidden; text-overflow: ellipsis;">
         <p class="card-text">{{class.description}}</p>
       </div>

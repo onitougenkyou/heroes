@@ -1,0 +1,35 @@
+.panel-body {
+  input {
+    width: 150px;
+  }
+
+  select {
+    color: black;
+
+    option {
+      color: black;
+    }
+  }
+
+  textarea {
+    color: black;
+  }
+
+  .attributs {
+    * {
+      display: inline-grid;
+      margin: 5px;
+    }
+  }
+
+  .inventaire {
+    * {
+      display: inline-grid;
+      margin: 5px;
+    }
+  }
+
+  .description {
+    display: grid;
+  }
+}

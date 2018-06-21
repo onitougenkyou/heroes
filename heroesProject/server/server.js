@@ -9,11 +9,13 @@ const mongo = require("mongoose");
 var playerModel = require('./model/player');
 var userModel = require('./model/user');
 var classModel = require('./model/class');
+var monsterModel = require('./model/monster');
 
 // import model depuis mongoose
 var model = mongo.model('players');
 var user = mongo.model('User');
 var classM = mongo.model('Class');
+var monster = mongo.model('Monster');
 
 
 var validator = require("email-validator");
@@ -124,7 +126,7 @@ auth.post('/register', (req, res) => {
   }
 });
 
-// Récupérer les joueurs du fichier json
+// Récupérer les joueurs
 api.get('/players', (req, res) => {
   classM.find({}, function (err, data) {
     if (err) {
@@ -218,6 +220,84 @@ api.get('/players/:id', (req, res) => {
   });
 });
 
+
+// Récupérer les monstres
+api.get('/monsters', (req, res) => {
+  monster.find({}, function (err, data) {
+    if (err) {
+      res.json({ success: false, message: "Une erreur est survenue lors de la récupération des monstres" });
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+
+// Ajout de monstre en base de donnée
+api.post('/monsters', (req, res) => {
+
+
+  if (req.body) {
+    var id = req.body.id;
+    // Ajout des datas pour la classe
+    var monsterSchema = new monster({
+      id: req.body.id,
+      type: req.body.type,
+      name: req.body.name,
+      level: req.body.level,
+      attributs: {
+        pv: req.body.attributs.pv,
+        force: req.body.attributs.force,
+        endurance: req.body.attributs.endurance,
+        chance: req.body.attributs.chance,
+        agilite: req.body.attributs.agilite,
+        perception: req.body.attributs.perception,
+        intelligence: req.body.attributs.intelligence
+      },
+      inventaire: {
+        arme: {
+          type: req.body.inventaire.weapon.weaponType,
+          dommage: req.body.inventaire.weapon.weaponDammage
+        },
+        defense: {
+          type: req.body.inventaire.armor.armorType,
+          defense: req.body.inventaire.armor.armorResistance
+        },
+        monney: req.body.inventaire.monney,
+        objetDrop: req.body.inventaire.objetDrop
+      },
+      description: req.body.description
+    });
+
+    // Sauvegarde de l'utilisateur
+    monsterSchema.save(function (err, data) {
+      if (err) {
+        console.log("Une erreur c'est produite", err);
+        return res.json({ success: false, message: "Erreur lors de l'ajout" })
+      } else {
+        console.log("Enregistrement de monstre bien effectuer", data);
+        return res.json({ success: true, message: "Monstre bien ajoutée" })
+      }
+    });
+  } else {
+    return res.json({ success: false, message: "Creation failure" });
+  }
+
+});
+
+// Récupération d'un monstre par son id
+api.get('/monsters/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  monster.findOne({ id: id }, function (err, monsterInfo) {
+    if (err) {
+      console.log('Erreur', err);
+    } else {
+      console.log('data', monsterInfo);
+      res.json({ success: true, monster: monsterInfo });
+    }
+  });
+});
 
 /**
  * Sauvegarde de nouveau joueur ou mise à jour si ID existe. 

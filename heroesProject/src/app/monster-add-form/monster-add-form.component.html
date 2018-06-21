@@ -1,0 +1,166 @@
+<h2 class="titleForm">Ajout d'un monstre</h2>
+
+<div class="panel-body" *ngIf="userIsLoggedIn">
+  <form [formGroup]="form" (ngSubmit)="createMonster(form.value)">
+    <div class="form-group col-sm-12">
+      <!-- Nom de la classe -->
+      <div class="nameClass">
+        <div class="item">
+          <h4>Type de monstre</h4>
+          <input type="text"
+                 name="type"
+                 class="form-control"
+                 placeholder="Type du monstre"
+                 formControlName="type" />
+        </div>
+        <div class="item">
+          <h4>Nom de la classe</h4>
+          <input type="text"
+                 name="name"
+                 class="form-control"
+                 placeholder="Nom du monstre"
+                 formControlName="name" />
+        </div>
+        <div class="item">
+          <label for="level">Niveau</label>
+          <input type="number"
+                 name="level"
+                 class="form-control"
+                 placeholder="niveau du monstre"
+                 formControlName="level" />
+        </div>
+      </div>
+      <!-- Attributs de la classe -->
+      <div class="attributs">
+        <div class="item">
+          <label for="force">force</label>
+          <input type="number"
+                 name="force"
+                 class="form-control"
+                 placeholder="force du monstre"
+                 formControlName="force" />
+        </div>
+        <div class="item">
+          <label for="intelligence">intelligence</label>
+          <input type="number"
+                 name="intelligence"
+                 class="form-control"
+                 placeholder="intelligence du monstre"
+                 formControlName="intelligence" />
+        </div>
+        <div class="item">
+          <label for="agilite">aglite</label>
+          <input type="number"
+                 name="agilite"
+                 class="form-control"
+                 placeholder="agilite du monstre"
+                 formControlName="agilite" />
+        </div>
+        <div class="item">
+          <label for="endurance">endurance</label>
+          <input type="number"
+                 name="endurance"
+                 class="form-control"
+                 placeholder="endurance du monstre"
+                 formControlName="endurance" />
+        </div>
+        <div class="item">
+          <label for="perception">Perception</label>
+          <input type="number"
+                 name="perception"
+                 class="form-control"
+                 placeholder="Perception du monstre"
+                 formControlName="perception" />
+        </div>
+        <div class="item">
+          <label for="chance">Chance</label>
+          <input type="number"
+                 name="chance"
+                 class="form-control"
+                 placeholder="Chance du monstre"
+                 formControlName="chance" />
+        </div>
+        <div class="item">
+          <label for="pv">Vie</label>
+          <input type="number"
+                 name="pv"
+                 class="form-control"
+                 placeholder="Vie du monstre"
+                 formControlName="pv" />
+        </div>
+      </div>
+    </div>
+    <!-- Inventaire de la classe -->
+    <div class="form-group col-sm-12 inventaire">
+      <div class="weaponCtn">
+        <h4 class="weaponTitle">Armes</h4>
+        <select class="choiceUser" name="weapon" formControlName="weaponType">
+          <option *ngFor="let wp of weaponTypes" [value]="wp.type">{{wp.type}}</option>
+        </select>
+      </div>
+      <div class="weaponDammageCtn">
+        <h4 class="weaponDammageTitle">Dommage de l'arme</h4>
+        <input type="number"
+               name="weaponDammageValue"
+               class="form-control"
+               placeholder="Dommage de l'arme"
+               formControlName="weaponDammageValue" />
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 inventaire">
+      <div class="armorCtn">
+        <h4>Défense</h4>
+        <select class="choiceUser" name="armor" formControlName="armorType">
+          <option *ngFor="let dp of armorType" [value]="dp.type">{{dp.type}}</option>
+        </select>
+      </div>
+      <div class="armorResistanceValueCtn">
+        <h4 class="armorResistanceTitle">Résistance de l'armure</h4>
+        <input type="number"
+               name="armorResistanceValue"
+               class="form-control"
+               placeholder="Résistance de l'armure"
+               formControlName="armorResistanceValue" />
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 inventaire">
+      <div class="monneyCtn">
+        <h4 class="monneyTitle">Argent</h4>
+        <input type="number"
+               name="monney"
+               class="form-control"
+               placeholder="Argent du monstre"
+               maxlength="25"
+               formControlName="monney" />
+      </div>
+    </div>
+
+    <!-- Description de la classe -->
+    <div class="form-group col-sm-12 description">
+      <label for="description">Description</label>
+      <textarea name="description"
+                cols="30"
+                rows="10"
+                placeholder="Description du monstre"
+                formControlName="description"></textarea>
+    </div>
+    <!-- Boutton send -->
+    <div class="form-group col-sm-12 btnCtn">
+      <button type="submit" class="btn btn-success create" data-dismiss="modal">Créer monstre</button>
+    </div>
+
+  </form>
+</div>
+
+
+<div *ngIf="!userIsLoggedIn">
+  <h3>Vous devez être connecter pour créer une classe</h3>
+  <div>
+    <span>Cliquer ici pour vous connectez : <a href="#" routerLink="/login">Connection</a></span>
+  </div>
+  <div>
+    <span>Pour créer un compte : <a href="#" routerLink="/register">Inscription</a></span>
+  </div>
+</div>

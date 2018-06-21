@@ -2,44 +2,44 @@
   <img src="../../assets/img/login.jpg" />
 </div>
 
+<div class="navCtn">
+  <nav>
+    <img class="home" src="assets/img/icon.jpg" />
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="/">Accueil</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.userIsAdmin()">
+        <a class="nav-link" href="#" routerLink="/administration">
+          <img src="assets/open-iconic/svg/cog.svg">
+        </a> <!--Page vers administration-->
+      </li>
+      <li class="nav-item" *ngIf="authService.userIsLoggedIn()">
+        <a class="nav-link" href="#" routerLink="/profil"><img src="assets/open-iconic/svg/person.svg"></a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.userIsLoggedIn()">
+        <a class="nav-link" href="#" routerLink="/login"><img src="assets/open-iconic/svg/account-login.svg"></a>
+      </li>
+      <li class="nav-item" *ngIf="authService.userIsLoggedIn()">
+        <a class="nav-link" href="#" (click)="authService.logOut()"><img src="assets/open-iconic/svg/account-logout.svg"></a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.userIsLoggedIn()">
+        <a class="nav-link" href="#" routerLink="/register">S'inscrire</a>
+      </li>
+      <li class="nav-item lastChild">
+        <a class="nav-link" href="#" routerLink="/about">A propos</a>
+      </li>
 
-<nav>
-  <img class="home" src="assets/img/icon.jpg" />
-  <ul class="navbar-nav">
-    <li class="nav-item active">
-      <a class="nav-link" href="#" routerLink="/">Accueil</a>
-    </li>
-    <li class="nav-item" *ngIf="authService.userIsAdmin()">
-      <a class="nav-link" href="#" routerLink="/administration">
-        <img src="assets/open-iconic/svg/cog.svg">
-      </a> <!--Page vers administration-->
-    </li>
-    <li class="nav-item" *ngIf="authService.userIsLoggedIn()">
-      <a class="nav-link" href="#" routerLink="/profil"><img src="assets/open-iconic/svg/person.svg"></a>
-    </li>
-    <li class="nav-item" *ngIf="!authService.userIsLoggedIn()">
-      <a class="nav-link" href="#" routerLink="/login"><img src="assets/open-iconic/svg/account-login.svg"></a>
-    </li>
-    <li class="nav-item" *ngIf="authService.userIsLoggedIn()">
-      <a class="nav-link" href="#" (click)="authService.logOut()"><img src="assets/open-iconic/svg/account-logout.svg"></a>
-    </li>
-    <li class="nav-item" *ngIf="!authService.userIsLoggedIn()">
-      <a class="nav-link" href="#" routerLink="/register">S'inscrire</a>
-    </li>
-    <li class="nav-item lastChild">
-      <a class="nav-link" href="#" routerLink="/about">A propos</a>
-    </li>
+      <!--<li class="nav-item">
+        <a class="nav-link" href="#" routerLink="/player">Player</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink="/player/:id">Détail</a>
+      </li>-->
+    </ul>
+  </nav>
+  <img class="navBackground" src="../../assets/img/nav.png" />
 
-    <!--<li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/player">Player</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/player/:id">Détail</a>
-    </li>-->
-  </ul>
-</nav>
-<img class="navBackground" src="../../assets/img/nav.png" />
-
-
+</div>
 
 <router-outlet></router-outlet>

@@ -1,0 +1,82 @@
+<div class="btnCtn">
+  <button class="btn text-white" style="background:#7a0000" routerLink="/monsters">Retour à la liste</button>
+</div>
+
+<div *ngIf="monsterDetails">
+  <div class="card text-white mb-3" style="max-width: 80%; margin:auto; margin-top:25px; background: #7a0000">
+    <div class="card-header">
+      <h2>{{monsterDetails.name}} {{monsterDetails.type}}</h2>
+    </div>
+    <div *ngIf="!haveError" class="card-body imageContent">
+      <img class="card-img-top" src="assets/monster/{{monsterTypeConvert}}/{{monsterNameConvert}}.jpg" alt="Card image cap">
+    </div>
+    <div class="card-body">
+
+
+      <div class="card-body" style="display: flex;">
+        <div class="card-body">
+          <h4>Attributs</h4>
+          <ul class="card-text" style="list-style-type:none">
+            <li> Force : {{monsterDetails.attributs.force}}</li>
+            <li> Intelligence : {{monsterDetails.attributs.intelligence}}</li>
+            <li> Agilité : {{monsterDetails.attributs.agilite}}</li>
+            <li> Perception : {{monsterDetails.attributs.perception}}</li>
+            <li> Endurance : {{monsterDetails.attributs.endurance}}</li>
+            <li> Chance : {{monsterDetails.attributs.chance}}</li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <h4>Arme</h4>
+          <p class="card-text">{{monsterDetails.inventaire.arme.type}}</p>
+          <h5>Détail de l'arme</h5>
+          <ul class="card-text" style="list-style-type:none">
+            <li>Dommage : {{monsterDetails.inventaire.arme.dommage}}</li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <h4>Armure</h4>
+          <p class="card-text">{{monsterDetails.inventaire.defense.type}}</p>
+          <h5>Détail de l'armure</h5>
+          <ul class="card-text" style="list-style-type:none">
+            <li>Défense : {{monsterDetails.inventaire.defense.defense}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="text-align:center">
+        <h4>Inventaire</h4>
+      </div>
+      <div class="card-body" style="display: flex; text-align:center">
+        <div class="card-body">
+          <h4>Argent</h4>
+          <p class="card-text">Or : {{monsterDetails.inventaire.monney}}</p>
+        </div>
+        <div class="card-body">
+          <h4>Objet à vendre</h4>
+          <div style="display: flex;">
+            <ul class="card-text" style="list-style-type:none" *ngFor="let objet of monsterDetails.inventaire.objetDrop">
+              <li>Type : {{objet.type}}</li>
+              <li>Nom : {{objet.name}}</li>
+              <li>Chance de drop: {{objet.luckToDrop}}%</li>
+              <li>Prix : {{objet.prix}} or</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <h5 class="card-title">Description</h5>
+      <p class="card-text">{{monsterDetails.description}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="errorMessage">
+  <div class="card text-white bg-danger mb-3" style="max-width: 80%; margin:auto; margin-top:25px;">
+    <div class="card-header">
+      <h1>Erreur</h1>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{errorMessage}}</h5>
+    </div>
+  </div>
+</div>

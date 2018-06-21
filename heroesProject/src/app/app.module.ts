@@ -11,6 +11,7 @@ import { PersoClassListComponent } from './perso-class-list/perso-class-list.com
 import { ClassService } from './services/class.service';
 import { AuthService } from './services/auth.service';
 import { PlayerService } from './services/player.service';
+import { MonsterService } from './services/monster.service';
 
 import { ClassAddFormComponent } from './class-add-form/class-add-form.component';
 import { HomeComponent } from './home/home.component';
@@ -20,18 +21,24 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { ProfilComponent } from './profil/profil.component';
 import { RegisterComponent } from './register/register.component';
 import { AdministrationComponent } from './administration/administration.component';
+import { MonsterAddFormComponent } from './monster-add-form/monster-add-form.component';
+import { MonsterListComponent } from './monster-list/monster-list.component';
+import { MonsterDetailsComponent } from './monster-details/monster-details.component';
 
 
 const routes = [
   { path: '', component: HomeComponent },
   { path: 'player/add', component: ClassAddFormComponent },
-  { path: 'players/:id', component: ClassDetailsComponent },
-  { path: 'player', component: PersoClassListComponent },
+  { path: 'player/:id', component: ClassDetailsComponent },
+  { path: 'players', component: PersoClassListComponent },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: AuthenticationComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profil', component: ProfilComponent },
-  { path: 'administration', component: AdministrationComponent }
+  { path: 'administration', component: AdministrationComponent },
+  { path: 'monster/add', component: MonsterAddFormComponent },
+  { path: 'monsters', component: MonsterListComponent },
+  { path: 'monster/:id', component: MonsterDetailsComponent }
 ]
 
 @NgModule({
@@ -46,7 +53,10 @@ const routes = [
     AuthenticationComponent,
     ProfilComponent,
     RegisterComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    MonsterAddFormComponent,
+    MonsterListComponent,
+    MonsterDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +65,7 @@ const routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ClassService, AuthService, PlayerService],
+  providers: [ClassService, AuthService, PlayerService, MonsterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,11 @@
+<div class="card-deck" style="max-width:90%; margin:auto; margin-top:25px;">
+  <div *ngFor="let monster of monsterArray" class="card text-white mb-3" style="margin:5px; background: #7a0000;">
+    <div class="card-body">
+      <h5 class="card-title"><a href="#" [routerLink]="['/monster', monster.id]">{{monster.name}}</a></h5>
+      <div style=" max-height:350px; overflow: hidden; text-overflow: ellipsis;">
+        <p class="card-text">{{monster.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Voir ajout ouverture dans modal -->

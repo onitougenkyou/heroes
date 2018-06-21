@@ -24,6 +24,10 @@
   }
 }
 
+.navCtn{
+  margin-bottom: 65px;
+}
+
 
 nav {
   /*box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
@@ -39,8 +43,8 @@ nav {
   position: absolute;
   z-index: 1;
   width: 1000px;
-  left: 179px;
-  top: 491px;
+  left: 479px;
+  top: 464px;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -93,6 +97,6 @@ img.home {
 
 img.navBackground {
   position: absolute;
-  left: 74px;
-  top: 460px;
+  left: 350px;
+  top: 431px;
 }
