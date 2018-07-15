@@ -1,8 +1,10 @@
+// Définit les personnages jouables
+
 var mongo = require('mongoose');
 
 var Schema = mongo.Schema;
 
-var classSchema = new Schema({
+var characterSchema = new Schema({
   id: { type: Number },
   name: { type: String },
   attributs: {
@@ -11,7 +13,8 @@ var classSchema = new Schema({
     agilite: { type: Number },
     perception: { type: Number },
     intelligence: { type: Number },
-    chance: {type: Number}
+    chance: { type: Number },
+    endurance: { type: Number }
   },
   inventaire: {
     armor: {
@@ -32,4 +35,4 @@ var classSchema = new Schema({
   description: { type: String },
 });
 
-module.exports = mongo.model('Class', classSchema);
+module.exports = mongo.model('Character', characterSchema);

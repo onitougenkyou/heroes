@@ -2,19 +2,21 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-let data = require('./class');
+const data = require('./class');
 const mongo = require("mongoose");
+
+
 
 // Models
 var playerModel = require('./model/player');
 var userModel = require('./model/user');
-var classModel = require('./model/class');
+var classModel = require('./model/character');
 var monsterModel = require('./model/monster');
 
 // import model depuis mongoose
-var model = mongo.model('players');
+var player = mongo.model('players');
 var user = mongo.model('User');
-var classM = mongo.model('Class');
+var character = mongo.model('Character');
 var monster = mongo.model('Monster');
 
 
@@ -33,7 +35,7 @@ app.use(function (req, res, next) {
 });
 
 // Connexion vers la base de données NoSQL
-var db = mongo.connect("mongodb://localhost:27017/player", function (err, response) {
+var db = mongo.connect("mongodb://localhost:27017/player", { useNewUrlParser: true }, function (err, response) {
   if (err) { console.log(err); }
   else { console.log('Connected to 27017 '); }
 });
@@ -61,7 +63,6 @@ auth.post('/login', (req, res) => {
     const email = req.body.email.toLocaleLowerCase();
     var password = req.body.password;
     const index = users.findIndex(user => user.email === email);
-
 
     user.findOne({ email: req.body.email }, function (err, userInfo) {
       if (err) {
@@ -126,12 +127,13 @@ auth.post('/register', (req, res) => {
   }
 });
 
-// Récupérer les joueurs
-api.get('/players', (req, res) => {
-  classM.find({}, function (err, data) {
+// Récupérer les personnages
+api.get('/characters', (req, res) => {
+  character.find({}, function (err, data) {
     if (err) {
       res.json({ success: false, message: "Une erreur est survenue lors de la récupération des classes" });
     } else {
+      console.log("Récupération bien effectuer", data)
       res.send(data);
     }
   });
@@ -154,23 +156,24 @@ const checkUserToken = (req, res, next) => {
   next();
 }
 
-// Ajout en base des classes jouable par le joueur
-api.post('/players', (req, res) => {
+// Ajout en base des personnages jouable par le joueur
+api.post('/characters', (req, res) => {
 
 
   if (req.body) {
     var id = req.body.id;
-    // Ajout des datas pour la classe
-    var classSchema = new classM({
+    // Ajout des datas pour la character
+    var classSchema = new character({
       id: req.body.id,
       name: req.body.name,
       attributs: {
-        vie: req.body.attributs.vie,
+        vie: req.body.attributs.pv,
         force: req.body.attributs.force,
+        endurance: req.body.attributs.endurance,
+        chance: req.body.attributs.chance,
         agilite: req.body.attributs.agilite,
         perception: req.body.attributs.perception,
-        intelligence: req.body.attributs.intelligence,
-        chance: req.body.attributs.chance
+        intelligence: req.body.attributs.intelligence
       },
       inventaire: {
         armor: {
@@ -207,15 +210,15 @@ api.post('/players', (req, res) => {
 
 });
 
-api.get('/players/:id', (req, res) => {
+api.get('/characters/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  classM.findOne({ id: id }, function (err, classInfo) {
+  character.findOne({ id: id }, function (err, characterInfo) {
     if (err) {
       console.log('Erreur', err);
     } else {
-      console.log('data', classInfo);
-      res.json({ success: true, class: classInfo });
+      console.log('data', characterInfo);
+      res.json({ success: true, class: characterInfo });
     }
   });
 });
@@ -239,7 +242,7 @@ api.post('/monsters', (req, res) => {
 
   if (req.body) {
     var id = req.body.id;
-    // Ajout des datas pour la classe
+    // Ajout des datas pour la character
     var monsterSchema = new monster({
       id: req.body.id,
       type: req.body.type,
@@ -303,12 +306,12 @@ api.get('/monsters/:id', (req, res) => {
  * Sauvegarde de nouveau joueur ou mise à jour si ID existe. 
  */
 app.post("/api/savePlayer", function (req, res, next) {
-  console.log('coucou route save');
   var id = req.body.id;
-  model.findOne({ _id: id }, function (err, player) {
+  player.findOne({ _id: id }, function (err, player) {
     if (player !== null) {
-      model.findOneAndUpdate({ _id: req.body.id }, {
+      player.findOneAndUpdate({ _id: req.body.id }, {
         //mise à jour du player avec l'ensemble de ses données récupérer du body pour la mise à jour
+        accountName: req.body.accountName,
         name: req.body.name,
         level: req.body.level,
         experience: req.body.experience,
@@ -352,8 +355,9 @@ app.post("/api/savePlayer", function (req, res, next) {
       });
       console.log("Mise à jour réussi");
     } else {
-      var p = new model({
+      var p = new player({
         // Création d'un nouveau player avec l'ensemble de ses données
+        accountName: req.body.accountName,
         name: req.body.name,
         level: req.body.level,
         experience: req.body.experience,
@@ -400,9 +404,71 @@ app.post("/api/savePlayer", function (req, res, next) {
   })
 })
 
+// Ajout en base des personnages jouable par le joueur
+api.post('/addPlayer', (req, res) => {
+
+
+  if (req.body) {
+
+    var id = req.body.id;
+    // Ajout des datas pour la character
+    var playerSchema = new player({
+      // Création d'un nouveau player avec l'ensemble de ses données
+      accountName: req.body.accountName,
+      name: req.body.name,
+      level: req.body.level,
+      experience: req.body.experience,
+      isAlive: req.body.isALive,
+      class: req.body.class,
+      attributs: {
+        vie: req.body.attributs.pv,
+        force: req.body.attributs.force,
+        intelligence: req.body.attributs.intelligence,
+        agilite: req.body.attributs.agilite,
+        perception: req.body.attributs.perception,
+        chance: req.body.attributs.chance
+      },
+      description: req.body.class.description,
+      inventaire: {
+        weapon: {
+          name: req.body.inventaire.weapon.weaponType,
+          dammage: req.body.inventaire.weapon.weaponDammage,
+          value: req.body.inventaire.weapon.weaponValue,
+          levelMin: req.body.inventaire.weapon.weaponLevel
+        },
+        armor: {
+          name: req.body.inventaire.armor.armorType,
+          defense: req.body.inventaire.armor.armorResistance,
+          value: req.body.inventaire.armor.armorValue,
+          levelMin: req.body.inventaire.armor.armorLevel
+        },
+        monney: req.body.inventaire.monney,
+        sell: req.body.inventaire.sell
+      }
+
+    });;
+
+    // Sauvegarde de l'utilisateur
+
+    playerSchema.save(function (err, data) {
+      if (err) {
+        console.log("Une erreur c'est produite", err);
+        return res.json({ success: false, message: "Erreur lors de l'ajout" })
+      } else {
+        console.log("Enregistrement bien effectuer", data);
+        return res.json({ success: true, message: "Player bien ajoutée" })
+      }
+    });
+  } else {
+    return res.json({ success: false, message: "Creation failure" });
+  }
+
+});
+
+
 // Suppression d'un perso
 app.post("/api/deletePlayer", function (req, res) {
-  model.remove({ _id: req.body.id }, function (err) {
+  player.remove({ _id: req.body.id }, function (err) {
     if (err) {
       res.send(err);
     }
@@ -412,10 +478,31 @@ app.post("/api/deletePlayer", function (req, res) {
   });
 })
 
+app.get("/api/getCurrentPlayer", (req, res) => {
+  console.log(req.body);
+
+  if (req.body) {
+    player.findOne({ accountName: req.body.account }, function (err, playerInfo) {
+      if (err) {
+        console.log('erreur');
+      } else {
+        //Comparaison des mots de passe
+        if (playerInfo) {
+          res.send(playerInfo);
+        } else {
+          res.status(401).json({ success: false, message: 'Impossible de récupérer les données du joueur' });
+        }
+      }
+    });
+  } else {
+    res.status(500).json({ success: false, message: "Données manquantes" });
+  }
+
+});
 
 // Récupération de l'ensemble des perso
 app.get("/api/getPlayer", function (req, res) {
-  model.find({}, function (err, data) {
+  player.find({}, function (err, data) {
     if (err) {
       res.send(err);
     }

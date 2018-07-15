@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { ChoiceComponent } from './choice/choice.component';
@@ -12,6 +13,7 @@ import { ClassService } from './services/class.service';
 import { AuthService } from './services/auth.service';
 import { PlayerService } from './services/player.service';
 import { MonsterService } from './services/monster.service';
+import { ToolsService } from './services/tools.service';
 
 import { ClassAddFormComponent } from './class-add-form/class-add-form.component';
 import { HomeComponent } from './home/home.component';
@@ -24,6 +26,8 @@ import { AdministrationComponent } from './administration/administration.compone
 import { MonsterAddFormComponent } from './monster-add-form/monster-add-form.component';
 import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterDetailsComponent } from './monster-details/monster-details.component';
+import { NewPartyComponent } from './new-party/new-party.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 
 const routes = [
@@ -38,7 +42,9 @@ const routes = [
   { path: 'administration', component: AdministrationComponent },
   { path: 'monster/add', component: MonsterAddFormComponent },
   { path: 'monsters', component: MonsterListComponent },
-  { path: 'monster/:id', component: MonsterDetailsComponent }
+  { path: 'monster/:id', component: MonsterDetailsComponent },
+  { path: 'newParty', component: NewPartyComponent },
+  { path: 'tutorial', component: TutorialComponent }
 ]
 
 @NgModule({
@@ -56,7 +62,10 @@ const routes = [
     AdministrationComponent,
     MonsterAddFormComponent,
     MonsterListComponent,
-    MonsterDetailsComponent
+    MonsterDetailsComponent,
+    NewPartyComponent,
+    FileSelectDirective,
+    TutorialComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +74,7 @@ const routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ClassService, AuthService, PlayerService, MonsterService],
+  providers: [ClassService, AuthService, PlayerService, MonsterService, ToolsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

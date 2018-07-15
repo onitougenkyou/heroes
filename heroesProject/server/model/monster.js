@@ -28,7 +28,8 @@ var monsterSchema = new Schema({
     monney: { type: Number },
     objetDrop: { type: Array }
   },
-  description: { type: String }
+  description: { type: String },
+  toto: { type: String }
 });
 
 module.exports = mongo.model('Monster', monsterSchema);

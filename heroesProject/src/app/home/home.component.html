@@ -7,9 +7,14 @@
     <h1>Heroes - Claim your destiny</h1>
   </div>
   <!--<h1 *ngIf="isLoggin">{{user.name}}</h1>-->
-  <div *ngIf="isLoggin" class="newGame">
+  <div *ngIf="isLoggin && !userHaveAParty" class="newGame">
     <img src="../../assets/img/btn.png" />
-    <button class="lauchGame" type="submit" (click)="test()"><span>Nouvelle partie</span></button>
+    <button class="lauchGame" type="submit" routerLink="/newParty"><span>Nouvelle partie</span></button>
+  </div>
+
+  <div *ngIf="isLoggin && userHaveAParty" class="newGame">
+    <img src="../../assets/img/btn.png" />
+    <button class="lauchGame" type="submit" routerLink="/tutorial"><span>Continuer</span></button>
   </div>
 
   <div class="presGame">

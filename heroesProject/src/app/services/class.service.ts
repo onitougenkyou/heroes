@@ -18,15 +18,14 @@ export class ClassService {
   constructor(private http: Http, private authService: AuthService) { }
 
   getClass() {
-    return this.http.get(this.base_url + 'api/players')
+    return this.http.get(this.base_url + 'api/characters')
       .map(res => res.json());
   }
 
   addClass(classData, token) {
-    console.log(classData);
     const requestOptions = this.authService.addAuthorizationHeader(token);
     if (requestOptions) {
-      return this.http.post(this.base_url + "api/players", classData)
+      return this.http.post(this.base_url + "api/characters", classData)
         .map(res => {
           this.classSubject.next(classData);
         })
@@ -34,7 +33,7 @@ export class ClassService {
   }
 
   getOneClass(id) {
-    return this.http.get(this.base_url + 'api/players/' + id)
+    return this.http.get(this.base_url + 'api/characters/' + id)
       .map(res => res.json());
   }
 }

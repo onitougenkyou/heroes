@@ -4,6 +4,7 @@ import { ClassService } from '../services/class.service';
 import { AuthService } from '../services/auth.service';
 import { PlayerService } from '../services/player.service';
 
+
 @Component({
   selector: 'app-class-add-form',
   templateUrl: './class-add-form.component.html',
@@ -30,8 +31,9 @@ export class ClassAddFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private classService: ClassService, private authService: AuthService) { }
 
-  ngOnInit() {
 
+
+  ngOnInit() {
     this.form = this.formBuilder.group({
       id: Date.now(),
       name: '',
@@ -56,8 +58,12 @@ export class ClassAddFormComponent implements OnInit {
 
     this.checkUserIsLoggedIn();
   }
+  
 
-
+  /**
+   * Créer l'objet class et l'envoi au service pour la sauvegarde en base
+   * @param classData
+   */
   createClass(classData) {
     const token = JSON.parse(localStorage.getItem('local-data')).token;
     let parseData = {
@@ -70,7 +76,7 @@ export class ClassAddFormComponent implements OnInit {
         perception: classData.perception,
         endurance: classData.endurance,
         chance: classData.chance,
-        vie: classData.vie
+        pv: classData.vie
       },
       inventaire: {
         weapon: {
@@ -94,9 +100,14 @@ export class ClassAddFormComponent implements OnInit {
     this.form.reset();
   }
 
+
+  /**
+   * Vérifie si l'utilisateur est connecté
+   */
   checkUserIsLoggedIn() {
     if (this.authService.userIsLoggedIn()) {
       this.userIsLoggedIn = true;
     }
   }
+
 }

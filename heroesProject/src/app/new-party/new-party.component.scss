@@ -1,0 +1,29 @@
+.card-img-top {
+  img {
+    width: 125px !important;
+  }
+}
+
+
+.card.active {
+  border-color: #0094ff;
+  margin: 15px;
+  width: 150px !important;
+
+  img {
+    width: 150px;
+  }
+
+  .card-title {
+    width: 150px;
+  }
+}
+
+.errorMsg {
+
+  p {
+    background: #fff;
+    font-weight: bold;
+    color: red;
+  }
+}

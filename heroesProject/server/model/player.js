@@ -3,23 +3,23 @@ var mongo = require('mongoose');
 var Schema = mongo.Schema;
 
 var playerSchema = new Schema({
+  accountName: { type: String },
   id: { type: Number },
   name: { type: String },
   level: { type: Number },
   experience: { type: Number },
   isAlive: { type: Boolean },
-  class: {
-    name: { type: String },
-    attributes: {
-      pv: { type: Number },
-      strenght: { type: Number },
-      intelligence: { type: Number },
-      agility: { type: Number },
-      perception: { type: Number },
-      luck: { type: Number }
-    },
-    description: { type: String }
+  class: { type: String },
+  attributs: {
+    vie: { type: Number },
+    force: { type: Number },
+    endurance: { type: Number },
+    chance: { type: Number },
+    agilite: { type: Number },
+    perception: { type: Number },
+    intelligence: { type: Number }
   },
+  description: { type: String },
   inventaire: {
     weapon: {
       name: { type: String },
@@ -36,7 +36,6 @@ var playerSchema = new Schema({
     monney: { type: Number },
     sell: { type: Array }
   }
-
 });
 
 module.exports = mongo.model('players', playerSchema);
