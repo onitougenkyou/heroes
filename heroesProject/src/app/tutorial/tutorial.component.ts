@@ -10,6 +10,8 @@ export class TutorialComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let tmp = localStorage.getItem('player');
+    console.log('tmp', tmp);
   }
 
 }

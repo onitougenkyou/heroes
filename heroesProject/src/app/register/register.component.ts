@@ -19,7 +19,14 @@ export class RegisterComponent implements OnInit {
 
 
   register(formData) {
-    this.authService.register(formData)
+    let user = {
+      id: Date.now(),
+      email: formData.email,
+      name: formData.name,
+      password: formData.password,
+      confirmPassword: formData.confirmPassword
+    }
+    this.authService.register(user)
       .subscribe(
       data => this.handleRegisterSuccess(data),
       error => this.handleRegisterFailure(error)

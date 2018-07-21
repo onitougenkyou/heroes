@@ -8,15 +8,15 @@ import { AuthService } from '../services/auth.service';
 })
 export class ProfilComponent implements OnInit {
 
-  decodeToken = null;
+  user = null;
   isAdmin: boolean = false;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     if (this.authService.userIsLoggedIn()) {
       const localToken = JSON.parse(localStorage.getItem('local-data'));
-      this.decodeToken = this.authService.decodeToken(localToken.token);
-      if (this.decodeToken && this.decodeToken.role === 'admin') {
+      this.user = this.authService.decodeToken(localToken.token);
+      if (this.user && this.user.role === 'admin') {
         this.isAdmin = true;
       }
     }

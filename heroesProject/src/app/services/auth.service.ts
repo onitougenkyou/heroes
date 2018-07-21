@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import * as jwtDecode from 'jwt-decode';
+import { window } from 'rxjs/operator/window';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
   base_url = "http://localhost:3000/auth/";
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
 
   }
 
@@ -34,10 +36,10 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem('local-data');
+    localStorage.removeItem('player');
   }
 
   register(credentials) {
-    console.log(credentials);
     return this.http.post(this.base_url + 'register', credentials)
       .map(res => res.json());
   }

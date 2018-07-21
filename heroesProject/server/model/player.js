@@ -4,6 +4,7 @@ var Schema = mongo.Schema;
 
 var playerSchema = new Schema({
   accountName: { type: String },
+  accountId: { type: String },
   id: { type: Number },
   name: { type: String },
   level: { type: Number },

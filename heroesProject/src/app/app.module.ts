@@ -28,6 +28,9 @@ import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterDetailsComponent } from './monster-details/monster-details.component';
 import { NewPartyComponent } from './new-party/new-party.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { PlayerDetailComponent } from './player-detail/player-detail.component';
+import { LevelBarComponent } from './level-bar/level-bar.component';
 
 
 const routes = [
@@ -65,7 +68,10 @@ const routes = [
     MonsterDetailsComponent,
     NewPartyComponent,
     FileSelectDirective,
-    TutorialComponent
+    TutorialComponent,
+    UserDetailComponent,
+    PlayerDetailComponent,
+    LevelBarComponent
   ],
   imports: [
     BrowserModule,

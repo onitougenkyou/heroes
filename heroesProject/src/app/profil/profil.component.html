@@ -1,8 +1,21 @@
-<div *ngIf="decodeToken">
-  <pre>{{decodeToken | json}}</pre>
+<div *ngIf="user">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-dataUser" role="tab" aria-controls="nav-home" aria-selected="true">Informations générales</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-monster" role="tab" aria-controls="nav-profile" aria-selected="false">Détail du personnage</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-dataUser" role="tabpanel" aria-labelledby="nav-home-tab">
+      <app-user-detail></app-user-detail>
+    </div>
+    <div class="tab-pane fade" id="nav-monster" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <app-player-detail></app-player-detail>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="!decodeToken" class="ctnCard">
+<div *ngIf="!user" class="ctnCard">
   <div  class="card text-white mb-3" style="max-width: 380px; background: #8c0101; margin: 0 auto">
     <h5 class="card-header">Erreur</h5>
     <div class="card-body">

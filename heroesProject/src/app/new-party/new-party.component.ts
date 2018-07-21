@@ -69,13 +69,12 @@ export class NewPartyComponent implements OnInit {
   newParty(playerData) {
     const token = JSON.parse(localStorage.getItem('local-data')).token;
     let classData = this.characterSelected;
-
-    console.log(this.decodeToken.name);
-
+    // Sauvegarde d'un nouveau joueur
     if (this.tools.stringIsNotEmptyOrNull(this.playerName)) {
       let parseData = {
         accountName: this.decodeToken.name,
-          id: Date.now(),
+        accountId: this.decodeToken.id,
+        id: Date.now(),
         name: this.playerName,
         level: 1,
         experience: 0,
@@ -108,7 +107,6 @@ export class NewPartyComponent implements OnInit {
         },
         description: classData.description
       };
-
       this.playerService.addPlayer(parseData, token).subscribe();
       // Redirigé vers tutorial du jeu
       this.router.navigateByUrl('/tutorial');

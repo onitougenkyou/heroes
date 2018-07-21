@@ -20,7 +20,9 @@ var UserSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
-  }
+  },
+  playerId: { type: String },
+  id: { type: String }
 });
 
 

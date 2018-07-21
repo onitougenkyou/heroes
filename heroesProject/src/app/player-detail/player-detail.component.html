@@ -1,0 +1,56 @@
+<div *ngIf="playerData">
+  <h2>Fiche de votre personnage</h2>
+
+  <h3 class="persoName">{{playerData.name}}</h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-1 ">
+        <div class="levelCtn" style="margin-bottom: 10px;">
+          {{playerData.level}}
+        </div>
+        <div class="experienceCtn">
+          <app-level-bar></app-level-bar>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="picturePlayerCtn">
+          <img class="img-fluid" src="assets/class/{{playerData.class}}.jpg" alt="Card image cap">
+        </div>
+      </div>
+      <div class="col-sm">
+        <table class="table table-dark">
+          <tbody>
+            <tr>
+              <th scope="row">Vie</th>
+              <td>{{playerData.attributs.vie}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Force</th>
+              <td>{{playerData.attributs.force}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Endurance</th>
+              <td>{{playerData.attributs.endurance}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Intelligence</th>
+              <td>{{playerData.attributs.intelligence}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Perception</th>
+              <td>{{playerData.attributs.perception}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Agilité</th>
+              <td>{{playerData.attributs.agilite}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Chance</th>
+              <td>{{playerData.attributs.chance}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

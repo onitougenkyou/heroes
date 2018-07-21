@@ -60,26 +60,33 @@ const auth = express.Router();
 // Connexion avec Token
 auth.post('/login', (req, res) => {
   if (req.body) {
+
     const email = req.body.email.toLocaleLowerCase();
     var password = req.body.password;
     const index = users.findIndex(user => user.email === email);
+
 
     user.findOne({ email: req.body.email }, function (err, userInfo) {
       if (err) {
         console.log('erreur');
       } else {
-        //Comparaison des mots de passe
-        if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-
-          // Check si l'utilisateur est un admin ou non
-          if (user.email === 'admin') {
-            token = jwt.sign({ iss: 'http://localhost:3000', role: userInfo.role, email: userInfo.email, name: userInfo.username }, secret);
-          } else {
-            token = jwt.sign({ iss: 'http://localhost:3000', role: userInfo.role, email: userInfo.email, name: userInfo.username }, secret);
-          }
-          res.json({ success: true, token: token });
+        if (userInfo == null || userInfo == undefined) {
+          console.log('NULL');
+          res.status(404).json({ success: false, message: 'Aucun utilisateur trouver, vérifier vos identifiants ou créer en un' });
         } else {
-          res.status(401).json({ success: false, message: 'Identifiants incorrect' });
+          //Comparaison des mots de passe
+          if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+
+            // Check si l'utilisateur est un admin ou non
+            if (user.name === 'admin') {
+              token = jwt.sign({ iss: 'http://localhost:3000', role: userInfo.role, email: userInfo.email, name: userInfo.username, id: userInfo.id }, secret);
+            } else {
+              token = jwt.sign({ iss: 'http://localhost:3000', role: userInfo.role, email: userInfo.email, name: userInfo.username, id: userInfo.id }, secret);
+            }
+            res.json({ success: true, token: token });
+          } else {
+            res.status(401).json({ success: false, message: 'Identifiants incorrect' });
+          }
         }
       }
     });
@@ -108,7 +115,8 @@ auth.post('/register', (req, res) => {
         email: req.body.email,
         username: req.body.name,
         password: req.body.password,
-        role: "user"
+        role: "user",
+        id: req.body.id
       });
 
       // Sauvegarde de l'utilisateur
@@ -158,8 +166,6 @@ const checkUserToken = (req, res, next) => {
 
 // Ajout en base des personnages jouable par le joueur
 api.post('/characters', (req, res) => {
-
-
   if (req.body) {
     var id = req.body.id;
     // Ajout des datas pour la character
@@ -302,112 +308,8 @@ api.get('/monsters/:id', (req, res) => {
   });
 });
 
-/**
- * Sauvegarde de nouveau joueur ou mise à jour si ID existe. 
- */
-app.post("/api/savePlayer", function (req, res, next) {
-  var id = req.body.id;
-  player.findOne({ _id: id }, function (err, player) {
-    if (player !== null) {
-      player.findOneAndUpdate({ _id: req.body.id }, {
-        //mise à jour du player avec l'ensemble de ses données récupérer du body pour la mise à jour
-        accountName: req.body.accountName,
-        name: req.body.name,
-        level: req.body.level,
-        experience: req.body.experience,
-        isAlive: req.body.isALive,
-        class: {
-          name: req.body.class.name,
-          attributes: {
-            pv: req.body.class.attributes.pv,
-            strenght: req.body.class.attributes.strenght,
-            intelligence: req.body.class.attributes.intelligence,
-            agility: req.body.class.attributes.agility,
-            perception: req.body.class.attributes.perception,
-            luck: req.body.class.attributes.luck
-          }
-        },
-        inventaire: {
-          weapon: {
-            name: req.body.inventaire.weapon.name,
-            dammage: req.body.inventaire.weapon.dammage,
-            value: req.body.inventaire.weapon.value.value,
-            levelMin: req.body.inventaire.weapon.levelMin
-          },
-          armor: {
-            name: req.body.inventaire.armor.name,
-            defense: req.body.inventaire.armor.defense,
-            value: req.body.inventaire.armor.value.value,
-            levelMin: req.body.inventaire.armor.levelMin
-          },
-          money: req.body.inventaire.monney.value,
-          sell: req.body.inventaire.sell
-        }
-
-      }, function (err, data) {
-        if (err) {
-          res.send(err);
-          console.log('Erreur lors de la mise à jour', err);
-        }
-        else {
-          res.send({ data });
-        }
-      });
-      console.log("Mise à jour réussi");
-    } else {
-      var p = new player({
-        // Création d'un nouveau player avec l'ensemble de ses données
-        accountName: req.body.accountName,
-        name: req.body.name,
-        level: req.body.level,
-        experience: req.body.experience,
-        class: {
-          name: req.body.class.name,
-          attributes: {
-            pv: req.body.class.attributes.pv,
-            strenght: req.body.class.attributes.strenght,
-            intelligence: req.body.class.attributes.intelligence,
-            agility: req.body.class.attributes.agility,
-            perception: req.body.class.attributes.perception,
-            luck: req.body.class.attributes.luck
-          },
-          description: req.body.class.description
-        },
-        inventaire: {
-          weapon: {
-            name: req.body.inventaire.weapon.name,
-            dammage: req.body.inventaire.weapon.dammage,
-            value: req.body.inventaire.weapon.value.value,
-            levelMin: req.body.inventaire.weapon.levelMin
-          },
-          armor: {
-            name: req.body.inventaire.armor.name,
-            defense: req.body.inventaire.armor.defense,
-            value: req.body.inventaire.armor.value.value,
-            levelMin: req.body.inventaire.armor.levelMin
-          },
-          money: req.body.inventaire.monney.value,
-          sell: req.body.inventaire.sell
-        }
-
-      }); // Sauvegarde du player, on check les éventuelles erreurs au passage
-      p.save(function (err) {
-        if (err) {
-          res.send(err);
-          console.log('Erreur rencontrée', err);
-        } else {
-          res.send({ player });
-          console.log('Nouvelle entrée faite');
-        }
-      })
-    }
-  })
-})
-
 // Ajout en base des personnages jouable par le joueur
 api.post('/addPlayer', (req, res) => {
-
-
   if (req.body) {
 
     var id = req.body.id;
@@ -415,6 +317,7 @@ api.post('/addPlayer', (req, res) => {
     var playerSchema = new player({
       // Création d'un nouveau player avec l'ensemble de ses données
       accountName: req.body.accountName,
+      accountId: req.body.accountId,
       name: req.body.name,
       level: req.body.level,
       experience: req.body.experience,
@@ -426,7 +329,8 @@ api.post('/addPlayer', (req, res) => {
         intelligence: req.body.attributs.intelligence,
         agilite: req.body.attributs.agilite,
         perception: req.body.attributs.perception,
-        chance: req.body.attributs.chance
+        chance: req.body.attributs.chance,
+        endurance: req.body.attributs.endurance
       },
       description: req.body.class.description,
       inventaire: {
@@ -446,7 +350,7 @@ api.post('/addPlayer', (req, res) => {
         sell: req.body.inventaire.sell
       }
 
-    });;
+    });
 
     // Sauvegarde de l'utilisateur
 
@@ -459,12 +363,12 @@ api.post('/addPlayer', (req, res) => {
         return res.json({ success: true, message: "Player bien ajoutée" })
       }
     });
+
   } else {
     return res.json({ success: false, message: "Creation failure" });
   }
 
 });
-
 
 // Suppression d'un perso
 app.post("/api/deletePlayer", function (req, res) {

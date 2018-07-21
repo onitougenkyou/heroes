@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
     if (this.authService.userIsLoggedIn()) {
       const localToken = JSON.parse(localStorage.getItem('local-data'));
       this.user = this.authService.decodeToken(localToken.token);
-      console.log(this.user);
       this.isLoggin = true;
       this.getPlayerInfo(this.user.name);
     }
@@ -56,9 +55,8 @@ export class HomeComponent implements OnInit {
     }
     if (this.currentPlayer != null) {
       this.userHaveAParty = true;
+      localStorage.setItem('player', JSON.stringify(this.currentPlayer));
     }
-    
-    console.log("CURRENT PLAYER",this.currentPlayer);
   }
 
 }

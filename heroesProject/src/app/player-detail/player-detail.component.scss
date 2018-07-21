@@ -1,0 +1,30 @@
+/*@import url('https://fonts.googleapis.com/css?family=Merienda');
+
+* {
+  font-family: 'Merienda', cursive;
+}*/
+
+.picturePlayerCtn{
+  padding-bottom: 20px;
+  width: 295px;
+}
+
+.persoName {
+  font-weight: bold;
+  font-size: 30px;
+  color: #D5AD6D;
+  background: -webkit-linear-gradient(transparent, transparent), -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+  /*background: -o-linear-gradient(transparent, transparent);*/
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.table.table-dark {
+  background-color: #140601;
+  th {
+    color: #D5AD6D;
+    background: -webkit-linear-gradient(transparent, transparent), -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 26%, #e2ba78 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
